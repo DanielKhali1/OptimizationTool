@@ -15,7 +15,7 @@ public class GUI extends Application
 		Pane pane = new Pane();
 		Scene scene = new Scene(pane, 600, 600);
 		stage.setScene(scene);
-		stage.setTitle("Optimization toolset");
+		stage.setTitle("Optimization Toolset");
 		stage.show();
 		
 	}
