@@ -1,5 +1,6 @@
 package Optimization.GA;
 
-public class GA {
+public class GA 
+{
 
 }

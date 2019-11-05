@@ -8,6 +8,7 @@ public class HolderTable extends SolutionSpace
 	
 	public HolderTable()
 	{
+		setName("HolderTable");
 		//set lower bounds
 		//set higher bounds
 		//set the global Minimum

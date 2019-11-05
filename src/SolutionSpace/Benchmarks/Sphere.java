@@ -7,6 +7,7 @@ public class Sphere extends SolutionSpace
 {
 	public Sphere()
 	{
+		setName("Sphere");
 		//set lower bounds
 		//set higher bounds
 		//set the global Minimum

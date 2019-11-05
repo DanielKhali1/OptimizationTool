@@ -9,6 +9,7 @@ public abstract class SolutionSpace
 	 * 
 	 * 
 	 */
+	private String name;
 	private double lowerBound;
 	private double higherBound;
 	private double globalMinimum;
@@ -27,10 +28,16 @@ public abstract class SolutionSpace
 	public double getGlobalMinimum() { return globalMinimum; }
 	public double getLowerBound() { return lowerBound; }
 	public double getHigherBound() { return higherBound; }
+	public String getName() { return name; }
 	
 	public void setGlobalMinimum(double globalMinimum) { this.globalMinimum = globalMinimum; }
 	public void setHigherBound(double higherBound) { this.higherBound = higherBound; }
 	public void setLowerBound(double lowerBound) { this.lowerBound = lowerBound; }
+	public void setName(String name) {this.name = name; }
+
+
+
+
 	
 	
 

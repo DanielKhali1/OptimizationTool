@@ -9,6 +9,7 @@ public class Ackley extends SolutionSpace
 	
 	public Ackley()
 	{
+		setName("Ackleys");
 		setLowerBound(-32.768);
 		setHigherBound(32.768);
 		setGlobalMinimum(0);
