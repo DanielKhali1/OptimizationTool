@@ -8,6 +8,7 @@ public class Eggholder extends SolutionSpace
 	
 	public Eggholder()
 	{
+		setName("EggHolder");
 		//set lower bounds
 		//set higher bounds
 		//set the global Minimum

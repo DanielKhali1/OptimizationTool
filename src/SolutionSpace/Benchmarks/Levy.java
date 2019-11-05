@@ -8,6 +8,8 @@ public class Levy extends SolutionSpace
 	
 	public Levy()
 	{
+		//set name
+		setName("Levy");
 		//set lower bounds
 		//set higher bounds
 		//set the global Minimum

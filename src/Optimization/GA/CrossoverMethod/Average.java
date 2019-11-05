@@ -1,5 +1,6 @@
 package Optimization.GA.CrossoverMethod;
 
-public class Average {
+public class Average 
+{
 
 }
