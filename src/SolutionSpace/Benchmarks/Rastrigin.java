@@ -8,20 +8,25 @@ public class Rastrigin extends SolutionSpace
 	
 	public Rastrigin()
 	{
+		//setDimensions(d);
 		setName("Rastrigin");
-		// TODO: set parameters
-		//set lower bounds
-		//set higher bounds
-		//set the global Minimum
+		setLowerBound(-5.12);
+		setHigherBound(5.12);
+		//Global Minimum = 0
+		double[] components = {0,0};
+		setGlobalMinimum(new Vector(components));
 	}
 	
 	
 	@Override
 	public double Function(Vector v) 
-	{	
+	{
+		double sum = 0;
 		
-		//TODO : define Levy function
-		
+		for(int i = 0; i < v.getComponents().length; i++)
+		{
+			
+		}
 		return 0.0;
 	}
 
