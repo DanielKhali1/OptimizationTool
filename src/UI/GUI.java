@@ -40,6 +40,10 @@ public class GUI extends Application
 	Button newTestCase = new Button("New Test Case");
 	Button removeTestCase = new Button("Remove Test Case");
 	Button clearAll = new Button("Clear All");
+	
+	Stage testCaseStage = new Stage();
+	Pane testCasePane = new Pane();
+	Scene testCaseScene = new Scene(testCasePane, 300, 400);
 
 
 
@@ -82,15 +86,25 @@ public class GUI extends Application
 		Line line = new Line(20, 210, 250, 210);
 		pane.getChildren().add(line);
 		
-		Button runVerbose = new Button("Run Verbose");
+		Button runVerbose = new Button("Run All Verbose");
 		setPosition(runVerbose, 50, 250);
 		buttonStyle(runVerbose);
 		pane.getChildren().add(runVerbose);
 		
-		Button runCSV = new Button("Run & Save");
+		Button runCSV = new Button("Run All & Save");
 		setPosition(runCSV, 50, 290);
 		buttonStyle(runCSV);
 		pane.getChildren().add(runCSV);
+		
+		Button runsVerbose = new Button("Run Selected Verbose");
+		setPosition(runsVerbose, 50, 330);
+		buttonStyle(runsVerbose);
+		pane.getChildren().add(runsVerbose);
+		
+		Button runsCSV = new Button("Run Selected & Save");
+		setPosition(runsCSV, 50, 370);
+		buttonStyle(runsCSV);
+		pane.getChildren().add(runsCSV);
 		
 		ScrollPane scrollPane = new ScrollPane();
 		
@@ -142,13 +156,13 @@ public class GUI extends Application
 			//disable pane
 			pane.setDisable(true);
 			
-			Stage stage = new Stage();
-			Pane testCasePane = new Pane();
-			Scene scene = new Scene(testCasePane, 300, 400);
+			testCaseStage = new Stage();
+			testCasePane = new Pane();
+			testCaseScene = new Scene(testCasePane, 350, 450);
 			
-			stage.setScene(scene);
-			stage.setTitle("New Test Case");
-			stage.show();
+			testCaseStage.setScene(testCaseScene);
+			testCaseStage.setTitle("New Test Case");
+			testCaseStage.show();
 			
 			// add new test case button
 			
@@ -167,23 +181,167 @@ public class GUI extends Application
 			
 			
 			Text AlgorithmTxt = new Text("Algorithms");
-			setPosition(AlgorithmTxt, 20, 145);
+			setPosition(AlgorithmTxt, 150, 95);
 			
 			String[] alg = { "GA", "PSO","Hybrid1", "Hybrid2", "Hybrid3" };
 			
 			ComboBox Algorithms = new ComboBox(FXCollections.observableArrayList(alg));
 			Algorithms.getSelectionModel().selectFirst();
-
-			setPosition(Algorithms, 20, 150);
+			setPosition(Algorithms, 150, 100);
+			
+			
 			
 			Button addBt = new Button("Add");
-			setPosition(addBt, 230, 350);
+			setPosition(addBt, 300, 400);
 			
+
+			Button cancelBt = new Button("Cancel");
+			setPosition(cancelBt, 230, 400);
+			
+			cancelBt.setOnAction(b->{
+				testCaseStage.hide();
+				pane.setDisable(false);
+			});
+			
+			
+			Text parameterstxt = new Text("Algorithm Parameters");
+			setPosition(parameterstxt, 20, 150);
+			
+			//Text GAModifiers = new Text("GA Modifiers");
+			//setPosition(GAModifiers, 20, 180);
+
+			Text GASelection = new Text("GA Selection");
+			setPosition(GASelection, 20, 190);
+			
+			
+			String[] select = {"Tournament", "Deep Tournament", "Roulette" };
+
+			ComboBox Selection = new ComboBox(FXCollections.observableArrayList(select));
+			Selection.getSelectionModel().selectFirst();
+			setPosition(Selection, 120, 170);
+
+			Text GACrossover = new Text("GA CrossOver");
+			setPosition(GACrossover, 20, 230);
+			
+			String[] cross = {"Fixed Crossover Point", "Random Crossover Point", "Average" };
+			ComboBox Crossover = new ComboBox(FXCollections.observableArrayList(cross));
+			Crossover.getSelectionModel().selectFirst();
+			setPosition(Crossover, 120, 210);
+
+			
+			
+			testCasePane.getChildren().addAll(GASelection, GACrossover, Selection, Crossover );
+			
+			Text mutationRate = new Text("Mutation Rate");
+			setPosition(mutationRate, 120, 230+50);
+
+			TextField mutationRatetf = new TextField("0.01"); 
+			mutationRatetf.setPrefWidth(75);
+			setPosition(mutationRatetf, 120, 235+50);
+
+
+			Text populationSize = new Text("Population Size");
+			setPosition(populationSize, 20, 230+50);
+		
+			
+			TextField populationSizetf = new TextField("50"); 
+			populationSizetf.setPrefWidth(75);
+			setPosition(populationSizetf, 20, 235+50);
+
+			Text inertia = new Text("Intertia");
+			setPosition(inertia, 20, 280+50);
+			
+			TextField inertiatf = new TextField("0.01"); 
+			inertiatf.setPrefWidth(75);
+			setPosition(inertiatf, 20, 285+50);
+
+			Text CognitiveComponent = new Text("CognitiveComponent");
+			setPosition(CognitiveComponent, 120, 280+50);
+			
+			TextField CognitiveComponentf = new TextField("0.01"); 
+			CognitiveComponentf.setPrefWidth(75);
+			setPosition(CognitiveComponentf, 120, 285+50);
+
+			Text SocialComponent = new Text("SocialComponent");
+			setPosition(SocialComponent, 20, 330+50);
+			
+			TextField SocialComponenttf = new TextField("0.01"); 
+			SocialComponenttf.setPrefWidth(75);
+			setPosition(SocialComponenttf, 20, 335+50);
+			
+			testCasePane.getChildren().addAll(parameterstxt, mutationRate, populationSize, inertia, CognitiveComponent, SocialComponent, mutationRatetf, populationSizetf, inertiatf, CognitiveComponentf, SocialComponenttf);
+			
+			inertiatf.setDisable(true);
+			CognitiveComponentf.setDisable(true);
+			SocialComponenttf.setDisable(true);
+			
+			populationSizetf.setDisable(false);
+			mutationRatetf.setDisable(false);
+			Crossover.setDisable(false);
+			Selection.setDisable(false);
+			
+			Algorithms.setOnAction(f-> {
+			if(Algorithms.getValue().equals("GA"))
+			{
+				inertiatf.setDisable(true);
+				CognitiveComponentf.setDisable(true);
+				SocialComponenttf.setDisable(true);
+				
+				populationSizetf.setDisable(false);
+				mutationRatetf.setDisable(false);
+				Crossover.setDisable(false);
+				Selection.setDisable(false);
+			}
+			else if(Algorithms.getValue().equals("PSO"))
+			{
+				inertiatf.setDisable(false);
+				CognitiveComponentf.setDisable(false);
+				SocialComponenttf.setDisable(false);
+				
+				populationSizetf.setDisable(true);
+				mutationRatetf.setDisable(true);
+				Crossover.setDisable(true);
+				Selection.setDisable(true);
+ 			}
+			else if(Algorithms.getValue().equals("Hybrid1"))
+			{
+				inertiatf.setDisable(false);
+				CognitiveComponentf.setDisable(false);
+				SocialComponenttf.setDisable(false);
+				
+				populationSizetf.setDisable(false);
+				mutationRatetf.setDisable(false);
+				Crossover.setDisable(false);
+				Selection.setDisable(false);
+			}
+			else if(Algorithms.getValue().equals("Hybrid2"))
+			{
+				inertiatf.setDisable(false);
+				CognitiveComponentf.setDisable(false);
+				SocialComponenttf.setDisable(false);
+				
+				populationSizetf.setDisable(false);
+				mutationRatetf.setDisable(false);
+				Crossover.setDisable(false);
+				Selection.setDisable(false);
+			}
+			else if(Algorithms.getValue().equals("Hybrid3"))
+			{
+				inertiatf.setDisable(false);
+				CognitiveComponentf.setDisable(false);
+				SocialComponenttf.setDisable(false);
+				
+				populationSizetf.setDisable(false);
+				mutationRatetf.setDisable(false);
+				Crossover.setDisable(false);
+				Selection.setDisable(false);
+			}
+			
+			});
 			addBt.setOnAction(f->{
 				
 				SolutionSpace tempSolution = null;
 				
-				System.out.println(SolutionSpaces.getValue());
 				if(SolutionSpaces.getValue().equals("Ackley"))
 				{
 					tempSolution = new Ackley();
@@ -258,12 +416,10 @@ public class GUI extends Application
 				});
 				
 				pane.setDisable(false);
-				stage.hide();
+				testCaseStage.hide();
 				
 			});
 
-			Button cancelBt = new Button("Cancel");
-			setPosition(cancelBt, 160, 350);
 
 
 			testCasePane.getChildren().addAll(iterationTxt, iterationTf, SolutionSpaceTxt, SolutionSpaces, Algorithms, AlgorithmTxt, addBt, cancelBt);
@@ -271,7 +427,7 @@ public class GUI extends Application
 			
 			// ---------------------------
 			
-			stage.setOnCloseRequest(a->{
+			testCaseStage.setOnCloseRequest(a->{
 				pane.setDisable(false);
 				
 			});
