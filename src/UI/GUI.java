@@ -40,7 +40,8 @@ public class GUI extends Application
 	Button newTestCase = new Button("New Test Case");
 	Button removeTestCase = new Button("Remove Test Case");
 	Button clearAll = new Button("Clear All");
-	
+	Button editTestCase = new Button("Edit Test Case");
+
 	Stage testCaseStage = new Stage();
 	Pane testCasePane = new Pane();
 	Scene testCaseScene = new Scene(testCasePane, 300, 400);
@@ -71,10 +72,10 @@ public class GUI extends Application
 		pane.getChildren().add(removeTestCase);
 		
 		addTask();
+		editTask();
 		removeSelectedTask();
 		clearAll();
 		
-		Button editTestCase = new Button("Edit Test Case");
 		setPosition(editTestCase, 50, 100);
 		buttonStyle(editTestCase);
 		pane.getChildren().add(editTestCase);
@@ -151,21 +152,86 @@ public class GUI extends Application
 	
 	public void addTask()
 	{
+		
 		newTestCase.setOnAction( e->{
 			
 			//disable pane
 			pane.setDisable(true);
 			
 			testCaseStage = new Stage();
-			testCasePane = new Pane();
+			testCasePane = new testCasePane(true);
 			testCaseScene = new Scene(testCasePane, 350, 450);
 			
 			testCaseStage.setScene(testCaseScene);
 			testCaseStage.setTitle("New Test Case");
 			testCaseStage.show();
+		});
+	}
+	
+	public void editTask()
+	{
+		editTestCase.setOnAction( e->{
+			//disable pane
+			pane.setDisable(true);
 			
-			// add new test case button
+			testCaseStage = new Stage();
+			testCasePane = new testCasePane(false);
+			testCaseScene = new Scene(testCasePane, 350, 450);
 			
+			testCaseStage.setScene(testCaseScene);
+			testCaseStage.setTitle("Edit Test Case");
+			testCaseStage.show();
+		});
+	}
+	
+	
+	
+	
+	public void setPosition(Node node, double x, double y)
+	{
+		node.setLayoutX(x);
+		node.setLayoutY(y);
+	}
+	
+	public void buttonStyle(Button button)
+	{
+		button.setPrefWidth(175);
+		button.setStyle("-fx-background-color: '#e0e0e0'; -fx-border-color: 'black'; -fx-border-style: solid; -fx-font-size: 16;");
+		button.setOnMouseEntered(e->{
+			button.setStyle("-fx-background-color: 'black'; -fx-border-color: 'black'; -fx-border-style: solid; -fx-text-fill: 'white'; -fx-font-size: 16;");
+		});
+		button.setOnMouseExited(e->{
+			button.setStyle("-fx-background-color: '#e0e0e0'; -fx-border-color: 'black'; -fx-border-style: solid; -fx-font-size: 16;");
+		});
+		
+	}
+	
+	class TaskButton extends Button
+	{
+		
+		boolean selected = false;
+		TestCase testcase;
+		
+		public TaskButton(TestCase testCase)
+		{
+			super();
+			this.testcase = testCase;
+
+			setText("Test Case "+buttons.size()+": \nIterations: " + testcase.getIterations() + "\nSolution Space: " + testcase.getSs().getName() + "\nOptimizer: " + testcase.getOptimizer().getAlgorithm());
+			
+			setStyle("-fx-background-color: #e0e0e0; -fx-border: solid; -fx-border-color: black;");
+			setPrefSize(298, 100);
+		}
+		
+	}
+	
+	class testCasePane extends Pane
+	{
+		boolean isAdd;
+		
+		public testCasePane(boolean isAdd)
+		{
+			this.isAdd = isAdd;
 			Text iterationTxt = new Text("Iterations");
 			setPosition(iterationTxt, 20, 45);
 			TextField iterationTf = new TextField("50");
@@ -190,9 +256,16 @@ public class GUI extends Application
 			setPosition(Algorithms, 150, 100);
 			
 			
-			
 			Button addBt = new Button("Add");
 			setPosition(addBt, 300, 400);
+			
+			Button editBt = new Button("Edit");
+			setPosition(editBt, 300, 400);
+			
+			if(isAdd)
+				editBt.setVisible(false);
+			else
+				addBt.setVisible(false);
 			
 
 			Button cancelBt = new Button("Cancel");
@@ -230,7 +303,7 @@ public class GUI extends Application
 
 			
 			
-			testCasePane.getChildren().addAll(GASelection, GACrossover, Selection, Crossover );
+			getChildren().addAll(GASelection, GACrossover, Selection, Crossover , editBt);
 			
 			Text mutationRate = new Text("Mutation Rate");
 			setPosition(mutationRate, 120, 230+50);
@@ -269,7 +342,7 @@ public class GUI extends Application
 			SocialComponenttf.setPrefWidth(75);
 			setPosition(SocialComponenttf, 20, 335+50);
 			
-			testCasePane.getChildren().addAll(parameterstxt, mutationRate, populationSize, inertia, CognitiveComponent, SocialComponent, mutationRatetf, populationSizetf, inertiatf, CognitiveComponentf, SocialComponenttf);
+			getChildren().addAll(parameterstxt, mutationRate, populationSize, inertia, CognitiveComponent, SocialComponent, mutationRatetf, populationSizetf, inertiatf, CognitiveComponentf, SocialComponenttf);
 			
 			inertiatf.setDisable(true);
 			CognitiveComponentf.setDisable(true);
@@ -339,6 +412,98 @@ public class GUI extends Application
 			}
 			
 			});
+
+			editBt.setOnAction(f->{
+				
+				SolutionSpace tempSolution = null;
+				
+				if(SolutionSpaces.getValue().equals("Ackley"))
+				{
+					tempSolution = new Ackley();
+				}
+				else if(SolutionSpaces.getValue().equals("Eggholder"))
+				{
+					tempSolution = new EggHolder();
+				}
+				else if(SolutionSpaces.getValue().equals("HolderTable"))
+				{
+					tempSolution = new HolderTable();
+				}
+				else if(SolutionSpaces.getValue().equals("Levy"))
+				{
+					tempSolution = new Levy();
+				}
+				else if(SolutionSpaces.getValue().equals("Rastrigin"))
+				{
+					tempSolution = new Rastrigin();
+				}
+				else if(SolutionSpaces.getValue().equals("Sphere"))
+				{
+					tempSolution = new Sphere();
+				}
+				
+				Optimizer tempOptimizer = null;
+				if(Algorithms.getValue().equals("GA"))
+				{
+					tempOptimizer = new Optimizer("GA");
+				}
+				else if(Algorithms.getValue().equals("PSO"))
+				{
+					tempOptimizer = new Optimizer("PSO");
+				}
+				else if(Algorithms.getValue().equals("Hybrid1"))
+				{
+					tempOptimizer = new Optimizer("Hybrid1");
+				}
+				else if(Algorithms.getValue().equals("Hybrid2"))
+				{
+					tempOptimizer = new Optimizer("Hybrid2");
+				}
+				else if(Algorithms.getValue().equals("Hybrid3"))
+				{
+					tempOptimizer = new Optimizer("Hybrid3");
+				}
+				
+				
+				
+				TaskButton button = new TaskButton( new TestCase(Integer.parseInt(iterationTf.getText()), tempSolution, tempOptimizer) );
+				
+				button.setOnAction(a->{
+
+					button.selected = !button.selected;
+					
+					if(button.selected)
+					{
+						for(int i = 0; i < buttons.size(); i++)
+						{
+							buttons.get(i).selected = false;
+							buttons.get(i).setStyle("-fx-background-color: #e0e0e0; -fx-border: solid; -fx-border-color: black");
+						}
+						button.selected = true;
+						button.setStyle("-fx-background-color: #5e5e5e; -fx-border: solid; -fx-border-color: white; -fx-text-fill: white");
+						
+					}
+					else
+						button.setStyle("-fx-background-color: #e0e0e0; -fx-border: solid; -fx-border-color: black");
+
+				});
+				
+				
+				for(int i = 0; i < buttons.size(); i++)
+				{
+					if(buttons.get(i).selected)
+					{
+						buttons.set(i, button);
+						break;
+					}
+				}
+				
+				pane.setDisable(false);
+				testCaseStage.hide();
+				
+			});
+			
+			
 			addBt.setOnAction(f->{
 				
 				SolutionSpace tempSolution = null;
@@ -423,7 +588,7 @@ public class GUI extends Application
 
 
 
-			testCasePane.getChildren().addAll(iterationTxt, iterationTf, SolutionSpaceTxt, SolutionSpaces, Algorithms, AlgorithmTxt, addBt, cancelBt);
+			getChildren().addAll(iterationTxt, iterationTf, SolutionSpaceTxt, SolutionSpaces, Algorithms, AlgorithmTxt, addBt, cancelBt);
 			
 			
 			// ---------------------------
@@ -433,48 +598,6 @@ public class GUI extends Application
 				
 			});
 			
-		});
-
-	}
-	
-	
-	
-	
-	public void setPosition(Node node, double x, double y)
-	{
-		node.setLayoutX(x);
-		node.setLayoutY(y);
-	}
-	
-	public void buttonStyle(Button button)
-	{
-		button.setPrefWidth(175);
-		button.setStyle("-fx-background-color: '#e0e0e0'; -fx-border-color: 'black'; -fx-border-style: solid; -fx-font-size: 16;");
-		button.setOnMouseEntered(e->{
-			button.setStyle("-fx-background-color: 'black'; -fx-border-color: 'black'; -fx-border-style: solid; -fx-text-fill: 'white'; -fx-font-size: 16;");
-		});
-		button.setOnMouseExited(e->{
-			button.setStyle("-fx-background-color: '#e0e0e0'; -fx-border-color: 'black'; -fx-border-style: solid; -fx-font-size: 16;");
-		});
-		
-	}
-	
-	class TaskButton extends Button
-	{
-		
-		boolean selected = false;
-		TestCase testcase;
-		
-		public TaskButton(TestCase testCase)
-		{
-			super();
-			this.testcase = testCase;
-
-			setText("Test Case "+buttons.size()+": \nIterations: " + testcase.getIterations() + "\nSolution Space: " + testcase.getSs().getName() + "\nOptimizer: " + testcase.getOptimizer().getAlgorithm());
-			
-			setStyle("-fx-background-color: #e0e0e0; -fx-border: solid; -fx-border-color: black;");
-			setPrefSize(298, 100);
 		}
-		
 	}
 }
