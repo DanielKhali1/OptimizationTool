@@ -12,7 +12,8 @@ public abstract class SolutionSpace
 	private String name;
 	private double lowerBound;
 	private double higherBound;
-	private double globalMinimum;
+	private Vector globalMinimum;
+	private double dimensions;
 	
 	
 	/**
@@ -24,16 +25,17 @@ public abstract class SolutionSpace
 	 */
 	public abstract double Function(Vector x);
 
-	
-	public double getGlobalMinimum() { return globalMinimum; }
+	public Vector getGlobalMinimum() { return globalMinimum; }
 	public double getLowerBound() { return lowerBound; }
 	public double getHigherBound() { return higherBound; }
 	public String getName() { return name; }
+	public double getDimensions() {return dimensions;}
 	
-	public void setGlobalMinimum(double globalMinimum) { this.globalMinimum = globalMinimum; }
+	public void setGlobalMinimum(Vector globalMinimum) { this.globalMinimum = globalMinimum; }
 	public void setHigherBound(double higherBound) { this.higherBound = higherBound; }
 	public void setLowerBound(double lowerBound) { this.lowerBound = lowerBound; }
 	public void setName(String name) {this.name = name; }
+	public void setDimensions(double dimensions) {this.dimensions = dimensions;}
 
 
 

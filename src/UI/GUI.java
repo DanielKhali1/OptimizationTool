@@ -7,7 +7,7 @@ import Experiment.TestCase;
 import Optimization.Optimizer;
 import SolutionSpace.SolutionSpace;
 import SolutionSpace.Benchmarks.Ackley;
-import SolutionSpace.Benchmarks.Eggholder;
+import SolutionSpace.Benchmarks.EggHolder;
 import SolutionSpace.Benchmarks.HolderTable;
 import SolutionSpace.Benchmarks.Levy;
 import SolutionSpace.Benchmarks.Rastrigin;
@@ -190,7 +190,7 @@ public class GUI extends Application
 				}
 				else if(SolutionSpaces.getValue().equals("Eggholder"))
 				{
-					tempSolution = new Eggholder();
+					tempSolution = new EggHolder();
 				}
 				else if(SolutionSpaces.getValue().equals("HolderTable"))
 				{
