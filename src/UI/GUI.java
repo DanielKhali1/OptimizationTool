@@ -198,6 +198,11 @@ public class GUI extends Application
 			Button cancelBt = new Button("Cancel");
 			setPosition(cancelBt, 230, 400);
 			
+			cancelBt.setOnAction(b->{
+				testCaseStage.hide();
+				pane.setDisable(false);
+			});
+			
 			
 			Text parameterstxt = new Text("Algorithm Parameters");
 			setPosition(parameterstxt, 20, 150);
@@ -266,29 +271,73 @@ public class GUI extends Application
 			
 			testCasePane.getChildren().addAll(parameterstxt, mutationRate, populationSize, inertia, CognitiveComponent, SocialComponent, mutationRatetf, populationSizetf, inertiatf, CognitiveComponentf, SocialComponenttf);
 			
+			inertiatf.setDisable(true);
+			CognitiveComponentf.setDisable(true);
+			SocialComponenttf.setDisable(true);
 			
+			populationSizetf.setDisable(false);
+			mutationRatetf.setDisable(false);
+			Crossover.setDisable(false);
+			Selection.setDisable(false);
 			
+			Algorithms.setOnAction(f-> {
 			if(Algorithms.getValue().equals("GA"))
 			{
+				inertiatf.setDisable(true);
+				CognitiveComponentf.setDisable(true);
+				SocialComponenttf.setDisable(true);
 				
+				populationSizetf.setDisable(false);
+				mutationRatetf.setDisable(false);
+				Crossover.setDisable(false);
+				Selection.setDisable(false);
 			}
 			else if(Algorithms.getValue().equals("PSO"))
 			{
+				inertiatf.setDisable(false);
+				CognitiveComponentf.setDisable(false);
+				SocialComponenttf.setDisable(false);
 				
+				populationSizetf.setDisable(true);
+				mutationRatetf.setDisable(true);
+				Crossover.setDisable(true);
+				Selection.setDisable(true);
  			}
 			else if(Algorithms.getValue().equals("Hybrid1"))
 			{
-
+				inertiatf.setDisable(false);
+				CognitiveComponentf.setDisable(false);
+				SocialComponenttf.setDisable(false);
+				
+				populationSizetf.setDisable(false);
+				mutationRatetf.setDisable(false);
+				Crossover.setDisable(false);
+				Selection.setDisable(false);
 			}
 			else if(Algorithms.getValue().equals("Hybrid2"))
 			{
-
+				inertiatf.setDisable(false);
+				CognitiveComponentf.setDisable(false);
+				SocialComponenttf.setDisable(false);
+				
+				populationSizetf.setDisable(false);
+				mutationRatetf.setDisable(false);
+				Crossover.setDisable(false);
+				Selection.setDisable(false);
 			}
 			else if(Algorithms.getValue().equals("Hybrid3"))
 			{
-
+				inertiatf.setDisable(false);
+				CognitiveComponentf.setDisable(false);
+				SocialComponenttf.setDisable(false);
+				
+				populationSizetf.setDisable(false);
+				mutationRatetf.setDisable(false);
+				Crossover.setDisable(false);
+				Selection.setDisable(false);
 			}
 			
+			});
 			addBt.setOnAction(f->{
 				
 				SolutionSpace tempSolution = null;
