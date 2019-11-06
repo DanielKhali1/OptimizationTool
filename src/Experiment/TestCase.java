@@ -15,7 +15,8 @@ public class TestCase
 		this.iterations = iterations;
 		this.optimizer = optimizer;
 		this.optimizer.setSolutionSpace(ss);
-		this.optimizer.randPop(optimizer);
+		this.optimizer.randPop(optimizer.getPopulationSize());
+		this.optimizer.printPopulation();
 	}
 	
 	public void run()

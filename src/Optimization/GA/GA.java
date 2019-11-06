@@ -12,4 +12,10 @@ public class GA extends Optimizer
 		this.mutationRate = mutationRate;
 	}
 
+	@Override
+	public void nextEpoch() 
+	{
+		
+	}
+
 }

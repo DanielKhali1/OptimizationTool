@@ -8,10 +8,12 @@ public abstract class Optimizer
 	private String Algorithm;
 	Vector[] population;
 	SolutionSpace solutionSpace;
+	private int populationSize;
 	
 	public Optimizer(int populationSize)
 	{
 		this.setAlgorithm(Algorithm);
+		this.setPopulationSize(populationSize);
 	}
 	
 	public void setSolutionSpace(SolutionSpace s)
@@ -21,11 +23,12 @@ public abstract class Optimizer
 
 	public void randPop(int size)
 	{
-		double[] components = new double[ (int) solutionSpace.getDimensions()];
+		double[] components;
 		
 		population = new Vector[size];
 		for(int i = 0; i < size; i++)
 		{
+			components = new double[(int) solutionSpace.getDimensions()];
 			for(int j = 0; j < components.length; j++)
 			{
 				components[j] = ( Math.random() * Math.abs(solutionSpace.getLowerBound() - solutionSpace.getHigherBound()) + solutionSpace.getLowerBound());
@@ -34,6 +37,8 @@ public abstract class Optimizer
 		}
 		
 	}
+	
+	public abstract void nextEpoch();
 	
 	public void printPopulation()
 	{
@@ -51,6 +56,18 @@ public abstract class Optimizer
 
 	public void setAlgorithm(String algorithm) {
 		Algorithm = algorithm;
+	}
+
+	public Vector[] getPopulation() {
+		return this.population;
+	}
+
+	public int getPopulationSize() {
+		return populationSize;
+	}
+
+	public void setPopulationSize(int populationSize) {
+		this.populationSize = populationSize;
 	}
 	
 }
