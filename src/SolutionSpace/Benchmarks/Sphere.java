@@ -7,10 +7,12 @@ public class Sphere extends SolutionSpace
 {
 	public Sphere()
 	{
+		//setDimensions(d);
 		setName("Sphere");
-		//set lower bounds
-		//set higher bounds
-		//set the global Minimum
+		setLowerBound(-5.12);
+		setHigherBound(5.12);
+		double[] components = {0,0};
+		setGlobalMinimum(new Vector(components));
 	}
 	
 	
@@ -18,7 +20,7 @@ public class Sphere extends SolutionSpace
 	public double Function(Vector v) 
 	{	
 		
-		//TODO : define Levy function
+		//TODO : define Sphere function
 		
 		return 0.0;
 	}
