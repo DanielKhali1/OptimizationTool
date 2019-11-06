@@ -1,4 +1,6 @@
 package Optimization.PSO;
-public class PSO {
+
+public class PSO 
+{
 
 }

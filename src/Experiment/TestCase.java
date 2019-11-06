@@ -1,28 +1,38 @@
 package Experiment;
 
+import java.util.ArrayList;
+
 import Optimization.Optimizer;
 import SolutionSpace.SolutionSpace;
 
 public class TestCase 
 {
 	private int iterations;
-	private SolutionSpace ss;
 	private Optimizer optimizer;
 	
 	public TestCase(int iterations, SolutionSpace ss, Optimizer optimizer)
 	{
 		this.iterations = iterations;
-		this.ss = ss;
 		this.optimizer = optimizer;
+		this.optimizer.setSolutionSpace(ss);
+		this.optimizer.randPop(optimizer);
+	}
+	
+	public void run()
+	{
+		
+	}
+	
+	public void saveToFile(ArrayList<String> lines)
+	{
+		
 	}
 
 	public int getIterations() { return iterations; }
-	public SolutionSpace getSs() { return ss; }
 	public Optimizer getOptimizer() { return optimizer; }
 	
 
 	public void setIterations(int iterations) { this.iterations = iterations; }
-	public void setSs(SolutionSpace ss) { this.ss = ss; }
 	public void setOptimizer(Optimizer optimizer) { this.optimizer = optimizer; }
 
 }
