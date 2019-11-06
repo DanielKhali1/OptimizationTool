@@ -86,7 +86,7 @@ public class GUI extends Application
 		Line line = new Line(20, 210, 250, 210);
 		pane.getChildren().add(line);
 		
-		Button runVerbose = new Button("Run All Verbose");
+		Button runVerbose = new Button("Run All");
 		setPosition(runVerbose, 50, 250);
 		buttonStyle(runVerbose);
 		pane.getChildren().add(runVerbose);
@@ -96,7 +96,7 @@ public class GUI extends Application
 		buttonStyle(runCSV);
 		pane.getChildren().add(runCSV);
 		
-		Button runsVerbose = new Button("Run Selected Verbose");
+		Button runsVerbose = new Button("Run Selected");
 		setPosition(runsVerbose, 50, 330);
 		buttonStyle(runsVerbose);
 		pane.getChildren().add(runsVerbose);
@@ -281,6 +281,7 @@ public class GUI extends Application
 			Selection.setDisable(false);
 			
 			Algorithms.setOnAction(f-> {
+				
 			if(Algorithms.getValue().equals("GA"))
 			{
 				inertiatf.setDisable(true);
@@ -470,9 +471,6 @@ public class GUI extends Application
 			this.testcase = testCase;
 
 			setText("Test Case "+buttons.size()+": \nIterations: " + testcase.getIterations() + "\nSolution Space: " + testcase.getSs().getName() + "\nOptimizer: " + testcase.getOptimizer().getAlgorithm());
-
-			
-			
 			
 			setStyle("-fx-background-color: #e0e0e0; -fx-border: solid; -fx-border-color: black;");
 			setPrefSize(298, 100);
