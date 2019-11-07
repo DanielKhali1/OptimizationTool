@@ -25,7 +25,7 @@ public class Manager
 		int iteration = 200;
 		
 		TestCase test = new TestCase(iteration, dropwave, ga);
-		test.run(false, true);
+		test.run(false, true, false);
 		
 		
 	}
