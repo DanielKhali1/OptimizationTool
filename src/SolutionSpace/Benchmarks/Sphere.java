@@ -7,7 +7,6 @@ public class Sphere extends SolutionSpace
 {
 	public Sphere()
 	{
-		//setDimensions(d);
 		setName("Sphere");
 		setLowerBound(-5.12);
 		setHigherBound(5.12);
@@ -19,10 +18,13 @@ public class Sphere extends SolutionSpace
 	@Override
 	public double Function(Vector v) 
 	{	
+		double sum = 0.0;
+		for(int i = 0; i < v.getComponents().length; i++)
+		{
+			sum = sum + Math.pow ( v.getComponents()[i], 2 );
+		}
 		
-		//TODO : define Sphere function
-		
-		return 0.0;
+		return sum;
 	}
 
 }
