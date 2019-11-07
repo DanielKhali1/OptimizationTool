@@ -5,11 +5,12 @@ import Util.Vector;
 
 public class Levy extends SolutionSpace
 {
-	public Levy()
+	public Levy(int dimensions)
 	{
 		setName("Levy");
 		setLowerBound(-10);
 		setHigherBound(10);
+		setDimensions(dimensions);
 		double[] components = {1,1};
 		setGlobalMinimum(new Vector(components));
 	}
