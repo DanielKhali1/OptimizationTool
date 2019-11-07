@@ -18,15 +18,25 @@ public class TestCase
 		this.optimizer.randPop(optimizer.getPopulationSize());
 	}
 	
-	public void run(boolean showInputs, boolean showSolution)
+	public void run(boolean showInputs, boolean showSolution, boolean saveToCSV)
 	{
-		for(int i = 0; i < iterations; i++)
+		ArrayList<String> lines = new ArrayList<String>();
+		lines.add("iteration,fitness");
+		
+		for(int i = 0; i <= iterations; i++)
 		{
 			optimizer.nextEpoch();
+			lines.add(iterations + "," + optimizer.getSolutionSpace().Function(optimizer.bestSolution()));
+
 			if(showInputs)
 				System.out.print(optimizer.bestSolution() + " " );
 			if(showSolution)
 				System.out.println(optimizer.getSolutionSpace().Function(optimizer.bestSolution()) + " ");
+		}
+		
+		if(saveToCSV)
+		{
+			saveToFile(lines);
 		}
 	}
 	
