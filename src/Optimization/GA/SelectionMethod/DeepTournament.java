@@ -4,9 +4,8 @@ package Optimization.GA.SelectionMethod;
 import SolutionSpace.SolutionSpace;
 import Util.Vector;
 
-public class DeepTournament extends Selection
+public class DeepTournament implements Selection
 {
-
 	@Override
 	public Vector SelectParent(Vector[] population, SolutionSpace ss) 
 	{
