@@ -28,6 +28,23 @@ public class GA extends Optimizer
 		super(population);
 		this.mutationRate = mutationRate;
 		this.selection = s;
+		crossover = new Average();
+	}
+	
+	public GA(int population, double mutationRate, Crossover c)
+	{
+		super(population);
+		this.mutationRate = mutationRate;
+		this.selection = new DeepTournament();
+		crossover = c;
+	}
+	
+	public GA(int population, double mutationRate, Selection s, Crossover c)
+	{
+		super(population);
+		this.mutationRate = mutationRate;
+		this.selection = s;
+		crossover = c;
 	}
 
 	@Override

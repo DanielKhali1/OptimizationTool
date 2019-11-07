@@ -15,15 +15,13 @@ public class BLX implements Crossover
 		
 		for(int i = 0; i < parent1.getComponents().length; i++)
 		{
-			//minimum x - alpha ( y - x ) 
-			//maximum y + alpoha( y - x )
 			double min = Math.min(parent1.getComponents()[i], parent2.getComponents()[i]);
 			double max = Math.max(parent1.getComponents()[i], parent2.getComponents()[i]);
 			
 			double lowEnd = min - alpha * (max - min);
 			double highEnd = max + alpha * (max - min);
 			
-			double x = (Math.random() * ((highEnd - lowEnd) + 1)) + lowEnd;
+			double x = (Math.random() * (highEnd - lowEnd)) + lowEnd;
 			child.getComponents()[i] = x;
 		}
 		
