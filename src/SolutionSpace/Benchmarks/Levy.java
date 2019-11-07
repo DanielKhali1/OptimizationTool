@@ -8,11 +8,9 @@ public class Levy extends SolutionSpace
 	
 	public Levy()
 	{
-		//setDimensions(d);
 		setName("Levy");
 		setLowerBound(-10);
 		setHigherBound(10);
-		//Global Minimum = 0
 		double[] components = {1,1};
 		setGlobalMinimum(new Vector(components));
 	}
