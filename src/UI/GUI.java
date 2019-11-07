@@ -351,10 +351,10 @@ public class GUI extends Application
 				{
 					tempSolution = new EggHolder();
 				}
-				else if(SolutionSpaces.getValue().equals("HolderTable"))
-				{
-					tempSolution = new HolderTable();
-				}
+//				else if(SolutionSpaces.getValue().equals("HolderTable"))
+//				{
+//					tempSolution = new HolderTable();
+//				}
 				else if(SolutionSpaces.getValue().equals("Levy"))
 				{
 					tempSolution = new Levy();

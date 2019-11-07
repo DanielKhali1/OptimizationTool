@@ -20,7 +20,11 @@ public class EggHolder extends SolutionSpace
 	@Override
 	public double Function(Vector v) 
 	{	
-		return 	( - ( v.getComponents()[1] + 47 ) * Math.sin( Math.sqrt (Math.abs ( v.getComponents()[1] + v.getComponents()[0] / 2 + 47 ) ) ) )
-				+ (v.getComponents()[0] * Math.sin( Math.sqrt( Math.abs( v.getComponents()[0] - (v.getComponents()[1] + 47 ) ) ) ) );
+		double term1 = -(v.getComponents()[1] + 47 ) * Math.sin(Math.sqrt(Math.abs(v.getComponents()[1] + v.getComponents()[0] / 2 + 47) ) );
+		double term2 = -v.getComponents()[0] * Math.sin(Math.sqrt(Math.abs(v.getComponents()[0] - (v.getComponents()[1] + 47))));
+		
+		return (term1 + term2);
 	}
+	
+
 }

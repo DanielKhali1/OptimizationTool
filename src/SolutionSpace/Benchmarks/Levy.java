@@ -5,7 +5,6 @@ import Util.Vector;
 
 public class Levy extends SolutionSpace
 {
-	
 	public Levy()
 	{
 		setName("Levy");
@@ -18,20 +17,22 @@ public class Levy extends SolutionSpace
 	@Override
 	public double Function(Vector v) 
 	{	
-		double[] w = null;
-		double summation = 0;
+		double[] w = new double[v.getComponents().length];
 		for(int i = 0; i < v.getComponents().length; i++)
 		{
-			w[i] = 1 + ( v.getComponents()[i] - 1 ) / 4;
+			w[i] = 1 + (v.getComponents()[i] - 1) / 4;
 		}
+		double term1 = Math.pow((Math.sin(Math.PI * w[0])),2);
+		double term2 = Math.pow ( ( w [ w.length - 1 ] - 1 ) , 2 ) * ( 1 + Math.pow ( Math.sin ( 2 * Math.PI * w [ w.length - 1 ] ) , 2 ) );
 		
-		for(int i = 0; i < v.getComponents().length - 1; i++)
+		double add = 0;
+		double sum = 0;
+		for(int i = 0; i < (w.length -1); i++)
 		{
-			double sum = (Math.pow( ( w[i] - 1 ), 2 ) * ( 1 + 10 * (Math.pow ( Math.sin( Math.PI * w[i] + 1 ), 2))));
-			summation = summation + sum;
+			add = ( Math.pow (v.getComponents()[i] - 1, 2) * ( 1 + 10 * ( Math.pow ( ( Math.sin ( Math.PI * v.getComponents()[i] + 1) ), 2 ) ) ) );
+			sum = sum + add;
 		}
-		
-		return (summation + ( Math.pow( ( Math.sin( Math.PI * w[0] ) ), 2) ) + 
-			   ( Math.pow ( w[v.getComponents().length] - 1 , 2 ) * (1 + ( Math.pow(Math.sin( 2 * Math.PI * w[v.getComponents().length] ) , 2 ) ) ) ) );
+		return (term1 + sum + term2);
 	}
+	
 }
