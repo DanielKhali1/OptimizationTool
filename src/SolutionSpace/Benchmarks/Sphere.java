@@ -5,11 +5,12 @@ import Util.Vector;
 
 public class Sphere extends SolutionSpace
 {
-	public Sphere()
+	public Sphere(int dimensions)
 	{
 		setName("Sphere");
 		setLowerBound(-5.12);
 		setHigherBound(5.12);
+		setDimensions(dimensions);
 		double[] components = {0,0};
 		setGlobalMinimum(new Vector(components));
 	}

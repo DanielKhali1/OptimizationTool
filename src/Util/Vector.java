@@ -14,7 +14,7 @@ public class Vector
 	 * 
 	 * @param components
 	 */
-	public Vector( double[] components )
+	public Vector( double ... components )
 	{
 		this.setComponents(components);
 	}
@@ -98,6 +98,14 @@ public class Vector
 	 */
 	public double[] getComponents() { return components; }
 
+	public String toString()
+	{
+		String str = "";
+		for(int i = 0; i < components.length; i++)
+			str += components[i] + " " ;
+		return str;
+	}
+	
 	/**
 	 * <p> will set the vector's components </p>
 	 * @param components
