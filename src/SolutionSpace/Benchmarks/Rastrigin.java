@@ -6,13 +6,14 @@ import Util.Vector;
 public class Rastrigin extends SolutionSpace
 {
 	
-	public Rastrigin()
+	public Rastrigin(int dimensions)
 	{
 		setName("Rastrigin");
 		setLowerBound(-5.12);
 		setHigherBound(5.12);
 		double[] components = {0,0};
 		setGlobalMinimum(new Vector(components));
+		setDimensions(dimensions);
 	}
 	
 	

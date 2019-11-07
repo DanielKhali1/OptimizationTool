@@ -20,7 +20,7 @@ public class GA extends Optimizer
 		super(population);
 		this.mutationRate = mutationRate;
 		selection = new DeepTournament();
-		crossover = new Average();
+		crossover = new BLX();
 	}
 	
 	public GA(int population, double mutationRate, Selection s)
