@@ -6,9 +6,12 @@ import Util.Vector;
 public abstract class Optimizer 
 {
 	private String Algorithm;
-	Vector[] population;
-	SolutionSpace solutionSpace;
+	protected Vector[] population;
+	protected SolutionSpace solutionSpace;
 	private int populationSize;
+	
+	
+	
 	
 	public Optimizer(int populationSize)
 	{
@@ -48,7 +51,20 @@ public abstract class Optimizer
 		}
 	}
 	
-	
+	public Vector bestSolution()
+	{
+		Vector bestSolution = population[0];
+		
+		for(int i = 1; i < population.length; i++)
+		{
+			if(solutionSpace.Function(bestSolution) > solutionSpace.Function(population[i]))
+			{
+				bestSolution = population[i];
+			}
+		}
+		
+		return bestSolution;
+	}
 	
 	public String getAlgorithm() {
 		return Algorithm;
@@ -60,6 +76,10 @@ public abstract class Optimizer
 
 	public Vector[] getPopulation() {
 		return this.population;
+	}
+	
+	public SolutionSpace getSolutionSpace() {
+		return solutionSpace;
 	}
 
 	public int getPopulationSize() {

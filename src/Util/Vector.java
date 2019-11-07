@@ -14,7 +14,7 @@ public class Vector
 	 * 
 	 * @param components
 	 */
-	public Vector( double[] components )
+	public Vector( double ... components )
 	{
 		this.setComponents(components);
 	}

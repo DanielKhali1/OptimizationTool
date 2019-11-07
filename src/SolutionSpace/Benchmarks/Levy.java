@@ -18,7 +18,7 @@ public class Levy extends SolutionSpace
 	@Override
 	public double Function(Vector v) 
 	{	
-		double[] w = null;
+		double[] w = new double[v.getComponents().length];
 		double summation = 0;
 		for(int i = 0; i < v.getComponents().length; i++)
 		{
@@ -32,6 +32,6 @@ public class Levy extends SolutionSpace
 		}
 		
 		return (summation + ( Math.pow( ( Math.sin( Math.PI * w[0] ) ), 2) ) + 
-			   ( Math.pow ( w[v.getComponents().length] - 1 , 2 ) * (1 + ( Math.pow(Math.sin( 2 * Math.PI * w[v.getComponents().length] ) , 2 ) ) ) ) );
+			   ( Math.pow ( w[v.getComponents().length-1] - 1 , 2 ) * (1 + ( Math.pow(Math.sin( 2 * Math.PI * w[v.getComponents().length] ) , 2 ) ) ) ) );
 	}
 }

@@ -16,18 +16,26 @@ public class TestCase
 		this.optimizer = optimizer;
 		this.optimizer.setSolutionSpace(ss);
 		this.optimizer.randPop(optimizer.getPopulationSize());
-		this.optimizer.printPopulation();
 	}
 	
-	public void run()
+	public void run(boolean showInputs, boolean showSolution)
 	{
-		
+		for(int i = 0; i < iterations; i++)
+		{
+			optimizer.nextEpoch();
+			if(showInputs)
+				System.out.print(optimizer.bestSolution() + " " );
+			if(showSolution)
+				System.out.println(optimizer.getSolutionSpace().Function(optimizer.bestSolution()) + " ");
+		}
 	}
 	
 	public void saveToFile(ArrayList<String> lines)
 	{
 		
 	}
+	
+	
 
 	public int getIterations() { return iterations; }
 	public Optimizer getOptimizer() { return optimizer; }
