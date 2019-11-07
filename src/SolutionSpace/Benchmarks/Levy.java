@@ -18,6 +18,7 @@ public class Levy extends SolutionSpace
 	public double Function(Vector v) 
 	{	
 		double[] w = new double[v.getComponents().length];
+		
 		for(int i = 0; i < v.getComponents().length; i++)
 		{
 			w[i] = 1 + (v.getComponents()[i] - 1) / 4;
@@ -32,6 +33,7 @@ public class Levy extends SolutionSpace
 			add = ( Math.pow (v.getComponents()[i] - 1, 2) * ( 1 + 10 * ( Math.pow ( ( Math.sin ( Math.PI * v.getComponents()[i] + 1) ), 2 ) ) ) );
 			sum = sum + add;
 		}
+
 		return (term1 + sum + term2);
 	}
 	
