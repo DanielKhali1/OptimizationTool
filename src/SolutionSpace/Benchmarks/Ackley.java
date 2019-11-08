@@ -28,7 +28,14 @@ public class Ackley extends SolutionSpace
 	    }
 	
 		return (-20.0 * Math.exp(-0.2 * Math.sqrt(sum1 / ((double )v.getComponents().length))) -    
-                Math.exp(sum2 / ((double )v.getComponents().length)) + 20.0 + Math.E);
+                Math.exp(sum2 / ((double )v.getComponents().length)) + 20.0 + Math.exp(1));
+	}
+	
+	public static void main(String[] args)
+	{
+		Ackley ackely = new Ackley();
+		double[] components = {0, 0};
+		System.out.println(ackely.Function(new Vector(components)));
 	}
 	
 }
