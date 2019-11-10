@@ -21,8 +21,11 @@ public class Manager
 	public static void main(String[] args) 
 	{
 		SolutionSpace ackley = new Ackley(2);
-		Optimizer ga = new GA(200, 0.01, new DeepTournament(), new BLX());
-		int iteration = 200;
+		Optimizer ga = new GA(500, 0.01, new DeepTournament(), new BLX());
+		((GA) ga).setElitismRate(0.2);
+		int iteration = 50;
+		
+		System.out.println(ackley.getLowerBound() + " " + ackley.getHigherBound());
 		
 		TestCase test = new TestCase(iteration, ackley, ga);
 		test.run(false, true, false);

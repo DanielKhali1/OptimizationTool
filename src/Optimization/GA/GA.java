@@ -1,5 +1,7 @@
 package Optimization.GA;
 
+import java.util.Arrays;
+
 import Optimization.Optimizer;
 import Optimization.GA.CrossoverMethod.Average;
 import Optimization.GA.CrossoverMethod.BLX;
@@ -21,6 +23,9 @@ public class GA extends Optimizer
 	Selection selection;
 	Crossover crossover;
 	
+	private double ElitismRate;
+	double GenitorRate;
+	
 	/**<p> constructs an instance of GA </p>
 	 * <ul>
 	 * <li>selection (default) : DeepTournament</li>
@@ -36,6 +41,7 @@ public class GA extends Optimizer
 		this.mutationRate = mutationRate;
 		selection = new DeepTournament();
 		crossover = new BLX();
+		ElitismRate = 0;
 	}
 	
 	/**
@@ -53,6 +59,7 @@ public class GA extends Optimizer
 		this.mutationRate = mutationRate;
 		this.selection = s;
 		crossover = new BLX();
+		ElitismRate = 0;
 	}
 	
 	/**
@@ -70,6 +77,7 @@ public class GA extends Optimizer
 		this.mutationRate = mutationRate;
 		this.selection = new DeepTournament();
 		crossover = c;
+		ElitismRate = 0;
 	}
 	
 	/**
@@ -85,6 +93,7 @@ public class GA extends Optimizer
 		this.mutationRate = mutationRate;
 		this.selection = s;
 		crossover = c;
+		ElitismRate = 0;
 	}
 
 	/**
@@ -111,7 +120,13 @@ public class GA extends Optimizer
 	{
 		Vector[] newPopulation = new Vector[population.length];
 		
-		for(int i = 0; i < newPopulation.length; i++)
+		for(int i = 0; i < (int)(ElitismRate*(population.length)); i++)
+		{
+			newPopulation[i] = bestSolution();
+		}
+		
+		
+		for(int i = (int)(ElitismRate*(population.length)); i < newPopulation.length; i++)
 		{
 			Vector parent1 = selection.SelectParent(population, solutionSpace);
 			Vector parent2 = selection.SelectParent(population, solutionSpace);
@@ -123,6 +138,7 @@ public class GA extends Optimizer
 		}
 		
 		population = newPopulation;
+		
 	}
 	
 	/**
@@ -137,6 +153,20 @@ public class GA extends Optimizer
 			{
 				child.getComponents()[i] *= (Math.random() * 2);
 			}
+		}
+	}
+	
+	/***
+	 * <p> sets a rate of elitism for evolution rate must be between 0 - 1 </p>
+	 * @param rate
+	 */
+	public void setElitismRate(double rate)
+	{
+		ElitismRate = rate;
+		
+		if(ElitismRate > 1)
+		{
+			System.err.println("ELITISM RATE MUST BE BETWEEN 0-1");
 		}
 	}
 	
