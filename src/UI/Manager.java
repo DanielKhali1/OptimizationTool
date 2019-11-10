@@ -3,6 +3,7 @@ package UI;
 import Experiment.TestCase;
 import Optimization.Optimizer;
 import Optimization.GA.GA;
+import Optimization.GA.CrossoverMethod.Average;
 import Optimization.GA.CrossoverMethod.BLX;
 import Optimization.GA.SelectionMethod.DeepTournament;
 import Optimization.GA.SelectionMethod.Tournament;
@@ -19,15 +20,12 @@ public class Manager
 {
 	public static void main(String[] args) 
 	{
-//		SolutionSpace dropwave = new DropWave();
-//		Optimizer ga = new GA(200, 0.01, new DeepTournament(), new BLX());
-//		int iteration = 200;
-//		
-//		TestCase test = new TestCase(iteration, dropwave, ga);
-//		test.run(false, true, false);
+		SolutionSpace ackley = new Ackley(2);
+		Optimizer ga = new GA(200, 0.01, new DeepTournament(), new BLX());
+		int iteration = 200;
 		
-		SolutionSpace ackleys = new Levy(2);
-		System.out.println(ackleys.Function(new Vector(1, 1)));
+		TestCase test = new TestCase(iteration, ackley, ga);
+		test.run(false, true, false);
 
 		
 		
