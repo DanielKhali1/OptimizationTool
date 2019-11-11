@@ -25,10 +25,8 @@ public class Manager
 		((GA) ga).setElitismRate(0.2);
 		int iteration = 50;
 		
-		System.out.println(ackley.getLowerBound() + " " + ackley.getHigherBound());
-		
 		TestCase test = new TestCase(iteration, ackley, ga);
-		test.run(false, true, false);
+		test.run(false, false, true);
 
 		
 		

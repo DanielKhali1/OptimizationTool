@@ -103,6 +103,7 @@ public class GA extends Optimizer
 	public void nextEpoch() 
 	{
 		evolve();
+		currentIteration++;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package Experiment;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import Optimization.Optimizer;
@@ -21,13 +23,15 @@ public class TestCase
 	public void run(boolean showInputs, boolean showSolution, boolean saveToCSV)
 	{
 		ArrayList<String> lines = new ArrayList<String>();
-		lines.add("iteration,fitness");
+		
+		if(saveToCSV)
+			lines.add("iteration,fitness");
 		
 		for(int i = 0; i <= iterations; i++)
 		{
 			optimizer.nextEpoch();
-			lines.add(iterations + "," + optimizer.getSolutionSpace().Function(optimizer.bestSolution()));
-
+			if(saveToCSV)
+				lines.add(optimizer.getCurrentIteration() + "," + optimizer.getSolutionSpace().Function(optimizer.bestSolution()));
 			if(showInputs)
 				System.out.print(optimizer.bestSolution() + " " );
 			if(showSolution)
@@ -36,13 +40,20 @@ public class TestCase
 		
 		if(saveToCSV)
 		{
-			saveToFile(lines);
+			try 
+			{
+				saveToFile(lines);	
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 	
-	public void saveToFile(ArrayList<String> lines)
+	public void saveToFile(ArrayList<String> lines) throws Exception
 	{
-		
+	    Files.write(Paths.get("test.csv"), lines);
 	}
 	
 	
