@@ -6,9 +6,9 @@ import Util.Vector;
 public class Ackley extends SolutionSpace
 {
 	
-	public Ackley()
+	public Ackley(int dimensions)
 	{
-		setDimensions(2);
+		setDimensions(dimensions);
 		setName("Ackleys");
 		setLowerBound(-32.768);
 		setHigherBound(32.768);
@@ -28,7 +28,7 @@ public class Ackley extends SolutionSpace
 	    }
 	
 		return (-20.0 * Math.exp(-0.2 * Math.sqrt(sum1 / ((double )v.getComponents().length))) -    
-                Math.exp(sum2 / ((double )v.getComponents().length)) + 20.0 + Math.E);
+                Math.exp(sum2 / ((double )v.getComponents().length)) + 20.0 + Math.exp(1));
 	}
 	
 }
