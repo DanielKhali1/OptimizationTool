@@ -22,7 +22,7 @@ import javafx.util.Duration;
 
 public class Visual extends Application
 {
-	
+	// hey leo do you know how you would be able to create like a random 3d solution space?
 	Circle[] circles;
 	Circle[] otherCircles;
 	
@@ -70,7 +70,7 @@ public class Visual extends Application
 			pane.getChildren().add(otherCircles[i]);
 		}
 		
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(400), (ActionEvent event) -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(200), (ActionEvent event) -> {
 			test.step();
 			
 			for(int i = 0; i < circles.length; i++)
@@ -86,7 +86,7 @@ public class Visual extends Application
 				otherCircles[i].setLayoutX(otherCircles[i].getLayoutX() * 25);
 				otherCircles[i].setLayoutY(otherCircles[i].getLayoutY() * 25);
 			}
-			System.out.println("PSO: " + sphere.Function(pso.bestSolution()) + " GA: " + sphere.Function(ga.bestSolution()));
+			System.out.println("PSO: " + sphere.Function(pso.bestSolution()) + " GA: " + sphere.Function(ga.bestSolution()) + " Target: " + sphere.Function(sphere.getGlobalMinimum()));
 			
 		}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
