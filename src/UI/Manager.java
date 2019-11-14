@@ -7,6 +7,7 @@ import Optimization.GA.CrossoverMethod.Average;
 import Optimization.GA.CrossoverMethod.BLX;
 import Optimization.GA.SelectionMethod.DeepTournament;
 import Optimization.GA.SelectionMethod.Tournament;
+import Optimization.PSO.PSO;
 import SolutionSpace.SolutionSpace;
 import SolutionSpace.Benchmarks.Ackley;
 import SolutionSpace.Benchmarks.DropWave;
@@ -20,15 +21,17 @@ public class Manager
 {
 	public static void main(String[] args) 
 	{
-		SolutionSpace ackley = new Ackley(2);
-		Optimizer ga = new GA(500, 0.01, new DeepTournament(), new BLX());
+		SolutionSpace ackley = new Rastrigin(2);
+		Optimizer pso = new PSO(50, 0.9, 2, 2);
+		
+		Optimizer ga = new GA(50, 0.01, new DeepTournament(), new BLX());
 		((GA) ga).setElitismRate(0.2);
-		int iteration = 50;
 		
-		TestCase test = new TestCase(iteration, ackley, ga);
-		test.run(false, false, true);
-
 		
+		int iteration = 20;
+		
+		TestCase test = new TestCase(iteration, ackley, ga, pso);
+		test.run(false, true, 100);
 		
 	}
 

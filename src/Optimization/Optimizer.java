@@ -44,6 +44,8 @@ public abstract class Optimizer
 	}
 	
 	public abstract void nextEpoch();
+	public abstract void reset();
+	public abstract void setup();
 	
 	public void printPopulation()
 	{

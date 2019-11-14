@@ -10,33 +10,86 @@ import SolutionSpace.SolutionSpace;
 public class TestCase 
 {
 	private int iterations;
-	private Optimizer optimizer;
+	private Optimizer[] optimizers;
 	
-	public TestCase(int iterations, SolutionSpace ss, Optimizer optimizer)
+	public TestCase(int iterations, SolutionSpace ss, Optimizer ... optimizers)
 	{
 		this.iterations = iterations;
-		this.optimizer = optimizer;
-		this.optimizer.setSolutionSpace(ss);
-		this.optimizer.randPop(optimizer.getPopulationSize());
+		this.optimizers = optimizers;
+		
+		for(Optimizer optimizer : optimizers)
+		{
+			optimizer.setSolutionSpace(ss);
+			optimizer.randPop(optimizer.getPopulationSize());
+			optimizer.setup();
+		}
 	}
 	
-	public void run(boolean showInputs, boolean showSolution, boolean saveToCSV)
+	public void step()
+	{
+		for(int i = 0; i < optimizers.length; i++)
+		{
+			optimizers[i].nextEpoch();
+		}
+	}
+	
+	public void run(boolean showSolution, boolean saveToCSV, int avg)
 	{
 		ArrayList<String> lines = new ArrayList<String>();
+		double[][] data = new double[iterations][optimizers.length];
 		
 		if(saveToCSV)
-			lines.add("iteration,fitness");
-		
-		for(int i = 0; i <= iterations; i++)
 		{
-			optimizer.nextEpoch();
-			if(saveToCSV)
-				lines.add(optimizer.getCurrentIteration() + "," + optimizer.getSolutionSpace().Function(optimizer.bestSolution()));
-			if(showInputs)
-				System.out.print(optimizer.bestSolution() + " " );
-			if(showSolution)
-				System.out.println(optimizer.getSolutionSpace().Function(optimizer.bestSolution()) + " ");
+			String title = "iteration,";
+			for( int i = 0; i < optimizers.length; i++)
+			{
+				title += "optimizer"+ (i+1) + ",";
+			}
+			lines.add(title);
 		}
+		
+		for(int i = 0; i < avg; i++)
+		{
+			for(int j = 0; j < iterations; j++)
+			{
+				for(int k = 0; k < optimizers.length ; k++)
+				{
+					optimizers[k].nextEpoch();
+					data[j][k] += optimizers[k].getSolutionSpace().Function(optimizers[k].bestSolution());
+				}
+			}
+			for(Optimizer optimizer : optimizers)
+			{
+				optimizer.reset();
+			}
+			
+		}
+		
+		for(int i = 0; i < data.length; i++)
+		{
+			for(int j = 0; j < data[i].length; j++)
+			{
+				data[i][j] /= avg;
+			}
+		}
+		
+		
+
+		for(int i = 0; i < data.length; i++)
+		{
+			String line = i + ",";
+			
+			for(int j = 0; j < data[i].length; j++)
+				line += data[i][j] + ",";
+				
+			
+			if(saveToCSV)
+				lines.add(line);
+			if(showSolution)
+				System.out.println(line);
+		}
+		
+		
 		
 		if(saveToCSV)
 		{
@@ -49,6 +102,8 @@ public class TestCase
 				e.printStackTrace();
 			}
 		}
+		
+		
 	}
 	
 	public void saveToFile(ArrayList<String> lines) throws Exception
@@ -59,10 +114,10 @@ public class TestCase
 	
 
 	public int getIterations() { return iterations; }
-	public Optimizer getOptimizer() { return optimizer; }
+	public Optimizer[] getOptimizers() { return optimizers; }
 	
 
 	public void setIterations(int iterations) { this.iterations = iterations; }
-	public void setOptimizer(Optimizer optimizer) { this.optimizer = optimizer; }
+	public void setOptimizer(Optimizer[] optimizers) { this.optimizers = optimizers; }
 
 }
