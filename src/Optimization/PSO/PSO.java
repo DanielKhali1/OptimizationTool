@@ -67,7 +67,20 @@ public class PSO extends Optimizer
 			
 			
 			// update position
+			
 			particle.getPosition().add(particle.getVelocity().clone());
+			
+			for(int i = 0; i < particle.getPosition().getComponents().length; i++)
+			{
+				if(particle.getPosition().getComponents()[i] > solutionSpace.getHigherBound())
+				{
+					particle.getPosition().getComponents()[i] = solutionSpace.getHigherBound();
+				}
+				else if(particle.getPosition().getComponents()[i] < solutionSpace.getLowerBound())
+				{
+					particle.getPosition().getComponents()[i] = solutionSpace.getLowerBound();
+				}
+			}
 			
 			//update gbest
 			if(solutionSpace.Function(particle.getPosition()) < solutionSpace.Function(globalBest))
