@@ -80,7 +80,7 @@ public class Visual extends Application
 			circles[i] = new Circle(3);
 			circles[i].setFill(Color.RED);
 			circles[i].setStroke(Color.BLACK);
-			circles[i].relocate(pso.getPopulation()[i].getComponents()[0], pso.getPopulation()[i].getComponents()[1]);
+			circles[i].relocate(pso.getPopulation()[i].getComponents()[0]+ sphere.getHigherBound(), pso.getPopulation()[i].getComponents()[1]+ sphere.getHigherBound());
 			
 			circles[i].setLayoutX(circles[i].getLayoutX() * (scene.getWidth()/detail));
 			circles[i].setLayoutY(circles[i].getLayoutY() * (scene.getHeight()/detail));
@@ -94,29 +94,32 @@ public class Visual extends Application
 			otherCircles[i] = new Circle(3);
 			otherCircles[i].setFill(Color.GREEN);
 			otherCircles[i].setStroke(Color.BLACK);
-			otherCircles[i].relocate(ga.getPopulation()[i].getComponents()[0], ga.getPopulation()[i].getComponents()[1]);
+			otherCircles[i].relocate(ga.getPopulation()[i].getComponents()[0]+ sphere.getHigherBound(), ga.getPopulation()[i].getComponents()[1]+ sphere.getHigherBound());
 			
-			otherCircles[i].setLayoutX(otherCircles[i].getLayoutX() * (scene.getWidth()/detail));
-			otherCircles[i].setLayoutY(otherCircles[i].getLayoutY() * (scene.getHeight()/detail));
+			otherCircles[i].setLayoutX(otherCircles[i].getLayoutX() * (scene.getWidth()/25));
+			otherCircles[i].setLayoutY(otherCircles[i].getLayoutY() * (scene.getHeight()/25));
 			
 			pane.getChildren().add(otherCircles[i]);
 		}
 		
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), (ActionEvent event) -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(250), (ActionEvent event) -> {
 			test.step();
 			
 			for(int i = 0; i < circles.length; i++)
 			{
-				circles[i].relocate(pso.getPopulation()[i].getComponents()[0], pso.getPopulation()[i].getComponents()[1]);
-				circles[i].setLayoutX(circles[i].getLayoutX() * (scene.getWidth()/detail));
-				circles[i].setLayoutY(circles[i].getLayoutY() * (scene.getHeight()/detail));
+				circles[i].relocate(pso.getPopulation()[i].getComponents()[0]+ sphere.getHigherBound(), pso.getPopulation()[i].getComponents()[1]+ sphere.getHigherBound());
+				circles[i].setLayoutX(circles[i].getLayoutX() * (scene.getWidth()/25));
+				circles[i].setLayoutY(circles[i].getLayoutY() * (scene.getHeight()/25));
 			}
 			
+			System.out.println((scene.getWidth()*4/detail));
+
 			for(int i = 0; i < otherCircles.length; i++)
 			{
-				otherCircles[i].relocate(ga.getPopulation()[i].getComponents()[0], ga.getPopulation()[i].getComponents()[1]);
-				otherCircles[i].setLayoutX(otherCircles[i].getLayoutX() * (scene.getWidth()/detail));
-				otherCircles[i].setLayoutY(otherCircles[i].getLayoutY() * (scene.getHeight()/detail));
+				
+				otherCircles[i].relocate(ga.getPopulation()[i].getComponents()[0] + sphere.getHigherBound(), ga.getPopulation()[i].getComponents()[1]+ sphere.getHigherBound());
+				otherCircles[i].setLayoutX(otherCircles[i].getLayoutX() * (scene.getWidth()/25));
+				otherCircles[i].setLayoutY(otherCircles[i].getLayoutY() * (scene.getHeight()/25));
 			}
 			System.out.println("PSO: " + sphere.Function(pso.bestSolution()) + " tandem: " + sphere.Function(ga.bestSolution()) + " Target: " + sphere.Function(sphere.getGlobalMinimum()));
 			
