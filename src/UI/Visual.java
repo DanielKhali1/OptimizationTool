@@ -45,7 +45,7 @@ public class Visual extends Application
 	public void start(Stage primaryStage) throws Exception 
 	{
 		Pane pane = new Pane();
-		Scene scene = new Scene(pane, 600, 600);
+		Scene scene = new Scene(pane, 1280, 720);
 		
 		GridPane gridPane = new GridPane();
 		SolutionSpace sphere = new EggHolder();
