@@ -18,7 +18,10 @@ public class DropWave extends SolutionSpace
 	@Override
 	public double Function(Vector v)
 	{
-		return ( - ( 1 + Math.cos ( 12 * Math.sqrt ( Math.pow(v.getComponents()[0], 2) + Math.pow( v.getComponents()[1], 2 ) ) ) ) ) / 
-			   ( 0.5 * ( Math.pow(v.getComponents()[0], 2 ) + Math.pow(v.getComponents()[1], 2 ) ) + 2 );
+		double x1 = v.getComponents()[0];
+		double x2 = v.getComponents()[1];
+		
+		
+		return -(1 + Math.cos(12 * Math.sqrt(x1*x1 + x2*x2))) / (0.5 * (x1*x1 + x2*x2) + 2);
 	}
 }

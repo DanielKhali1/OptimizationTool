@@ -12,6 +12,7 @@ import Optimization.PSO.PSO;
 import SolutionSpace.SolutionSpace;
 import SolutionSpace.Benchmarks.Ackley;
 import SolutionSpace.Benchmarks.DropWave;
+import SolutionSpace.Benchmarks.Easom;
 import SolutionSpace.Benchmarks.EggHolder;
 import SolutionSpace.Benchmarks.HolderTable;
 import SolutionSpace.Benchmarks.Levy;
@@ -23,14 +24,14 @@ public class Manager
 {
 	public static void main(String[] args) 
 	{
-		SolutionSpace ackley = new Rastrigin(2);
-		Optimizer pso = new PSO(50, 0.9, 2, 2);	
+		SolutionSpace ackley = new Sphere(10);
+		Optimizer pso = new PSO(50, 0.3, 2, 2);	
 		
+		System.out.println(ackley.Function(ackley.getGlobalMinimum()));
 		
 		Optimizer ga = new GA(50, 0.01, new DeepTournament(), new BLX());
-		((GA) ga).setElitismRate(0.2);
 		
-		Optimizer tandem = new TandemHybrid(100, 0.9, 2, 2, 0.01);
+		Optimizer tandem = new TandemHybrid(50, 0.9, 2, 2, 0.01, 0.2);
 
 		
 		int iteration = 20;

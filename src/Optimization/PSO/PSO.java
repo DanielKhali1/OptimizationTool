@@ -34,7 +34,7 @@ public class PSO extends Optimizer
 			particles[i].setRandomVelocity(solutionSpace.getLowerBound(), solutionSpace.getHigherBound());
 			
 			//setting the global best of the population 
-			if(solutionSpace.Function(particles[i].getPosition()) < solutionSpace.Function(globalBest))
+			if(solutionSpace.Function(particles[i].getPosition()) > solutionSpace.Function(globalBest))
 			{
 				globalBest = particles[i].getPosition().clone();
 			}

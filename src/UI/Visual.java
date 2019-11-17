@@ -11,6 +11,8 @@ import Optimization.Hybrid.TandemHybrid;
 import Optimization.PSO.PSO;
 import SolutionSpace.SolutionSpace;
 import SolutionSpace.Benchmarks.Ackley;
+import SolutionSpace.Benchmarks.DropWave;
+import SolutionSpace.Benchmarks.Easom;
 import SolutionSpace.Benchmarks.EggHolder;
 import SolutionSpace.Benchmarks.HolderTable;
 import SolutionSpace.Benchmarks.Rastrigin;
@@ -46,7 +48,7 @@ public class Visual extends Application
 		Scene scene = new Scene(pane, 600, 600);
 		
 		GridPane gridPane = new GridPane();
-		SolutionSpace sphere = new Rastrigin(2);
+		SolutionSpace sphere = new EggHolder();
 		
 		for(int i = 0; i < detail; i++)
 		{
@@ -67,7 +69,7 @@ public class Visual extends Application
 //		Optimizer ga = new GA(100, 0.01, new DeepTournament(), new BLX());
 //		((GA) ga).setElitismRate(0.2);
 		
-		Optimizer ga = new TandemHybrid(100, 0.9, 2, 2, 0.01);
+		Optimizer ga = new TandemHybrid(100, 0.9, 2, 2, 0.01, 0.4);
 		
 		
 		int iteration = 20;
@@ -102,7 +104,7 @@ public class Visual extends Application
 			pane.getChildren().add(otherCircles[i]);
 		}
 		
-		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(250), (ActionEvent event) -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), (ActionEvent event) -> {
 			test.step();
 			
 			for(int i = 0; i < circles.length; i++)
@@ -122,7 +124,8 @@ public class Visual extends Application
 				otherCircles[i].setLayoutY(otherCircles[i].getLayoutY() * (scene.getHeight()/25));
 			}
 			System.out.println("PSO: " + sphere.Function(pso.bestSolution()) + " tandem: " + sphere.Function(ga.bestSolution()) + " Target: " + sphere.Function(sphere.getGlobalMinimum()));
-			
+			System.out.println("PSO: " + pso.bestSolution() + " tandem: " + ga.bestSolution() + " Target: " + sphere.getGlobalMinimum());
+
 		}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();

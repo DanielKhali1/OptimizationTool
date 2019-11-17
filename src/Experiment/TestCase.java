@@ -40,11 +40,7 @@ public class TestCase
 		
 		if(saveToCSV)
 		{
-			String title = "iteration,";
-			for( int i = 0; i < optimizers.length; i++)
-			{
-				title += "optimizer"+ (i+1) + ",";
-			}
+			String title = "iteration,GA,PSO,Hybrid";
 			lines.add(title);
 		}
 		

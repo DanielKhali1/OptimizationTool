@@ -8,39 +8,37 @@ import Optimization.GA.SelectionMethod.Selection;
 import Optimization.PSO.Particle;
 import Util.Vector;
 
-public class TandemHybrid extends Optimizer
+public class SwitchHybrid extends Optimizer
 {
-	double mutationRate;
-	Selection selection;
-	Crossover crossover;
-	double sc;
-	double cc;
-	double inertia;
-	
-	Vector globalBest;
 	Particle[] particles;
+	boolean GAfirst;
+	Vector globalBest;
+	Selection selection = new DeepTournament();
+	Crossover crossover = new BLX();
+	double mutationRate;
+	double inertia;
+	double cc;
+	double sc;
 	
-	double rate;
+	double iterationSwitchRatio;
 	
 	
-	public TandemHybrid(int populationSize, double inertia, double sc,double cc, double mutationRate, double rate) 
+	public SwitchHybrid(int populationSize, double iterationSwitchRatio, boolean GAfirst, double mutationRate, double inertia, double cc, double sc)
 	{
 		super(populationSize);
-		particles = new Particle[(int)(populationSize*rate)];
-		this.sc = sc;
-		this.cc = cc;
-		this.mutationRate = mutationRate;
-		this.crossover = new BLX();
-		this.selection = new DeepTournament();
-		this.rate = rate;
 		
+		particles = new Particle[populationSize];
+		this.GAfirst = GAfirst;
+		this.mutationRate = mutationRate;
+		this.inertia = inertia;
+		this.cc = cc;
+		this.sc = sc;
+		this.iterationSwitchRatio = iterationSwitchRatio;
 	}
-
+	
 	public void evolve()
 	{
-		//Vector[] newPopulation = new Vector[population.length];
-		
-		for(int i = (int)(population.length*rate); i < population.length; i++)
+		for(int i = population.length; i < population.length; i++)
 		{
 			Vector parent1 = selection.SelectParent(population, solutionSpace);
 			Vector parent2 = selection.SelectParent(population, solutionSpace);
@@ -52,17 +50,6 @@ public class TandemHybrid extends Optimizer
 		}
 	}
 	
-	private void mutate(Vector child)
-	{
-		for(int i = 0; i < child.getComponents().length; i++)
-		{
-			if(mutationRate > Math.random())
-			{
-				child.getComponents()[i] *= (Math.random() * 2);
-			}
-		}
-	}
-
 	public void updateVelocities()
 	{
 		for(Particle particle : particles)
@@ -124,12 +111,22 @@ public class TandemHybrid extends Optimizer
 		}
 	}
 	
-	
-	@Override
-	public void nextEpoch() 
+	private void mutate(Vector child)
 	{
-		evolve();
-		updateVelocities();
+		for(int i = 0; i < child.getComponents().length; i++)
+		{
+			if(mutationRate > Math.random())
+			{
+				child.getComponents()[i] *= (Math.random() * 2);
+			}
+		}
+	}
+
+
+	@Override
+	public void nextEpoch()
+	{
+		
 	}
 
 	@Override
@@ -181,5 +178,5 @@ public class TandemHybrid extends Optimizer
 			}
 		}
 	}
-
+	
 }
