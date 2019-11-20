@@ -1,5 +1,6 @@
 package Optimization.Hybrid;
 
-public class Hybrid {
-
+public class Hybrid
+{
+	
 }

@@ -1,7 +1,5 @@
 package Optimization.GA;
 
-import java.util.Arrays;
-
 import Optimization.Optimizer;
 import Optimization.GA.CrossoverMethod.Average;
 import Optimization.GA.CrossoverMethod.BLX;
@@ -103,6 +101,7 @@ public class GA extends Optimizer
 	public void nextEpoch() 
 	{
 		evolve();
+		currentIteration++;
 	}
 	
 	
@@ -168,6 +167,19 @@ public class GA extends Optimizer
 		{
 			System.err.println("ELITISM RATE MUST BE BETWEEN 0-1");
 		}
+	}
+
+	@Override
+	public void reset() 
+	{
+		randPop(population.length);
+		setCurrentIteration(0);
+	}
+
+	@Override
+	public void setup() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

@@ -9,14 +9,13 @@ public abstract class Optimizer
 	protected Vector[] population;
 	protected SolutionSpace solutionSpace;
 	private int populationSize;
-	
-	
-	
+	protected int currentIteration;
 	
 	public Optimizer(int populationSize)
 	{
 		this.setAlgorithm(Algorithm);
 		this.setPopulationSize(populationSize);
+		this.setCurrentIteration(0);
 	}
 	
 	public void setSolutionSpace(SolutionSpace s)
@@ -42,6 +41,8 @@ public abstract class Optimizer
 	}
 	
 	public abstract void nextEpoch();
+	public abstract void reset();
+	public abstract void setup();
 	
 	public void printPopulation()
 	{
@@ -88,6 +89,14 @@ public abstract class Optimizer
 
 	public void setPopulationSize(int populationSize) {
 		this.populationSize = populationSize;
+	}
+
+	public int getCurrentIteration() {
+		return currentIteration;
+	}
+
+	public void setCurrentIteration(int currentIteration) {
+		this.currentIteration = currentIteration;
 	}
 	
 }
