@@ -11,9 +11,6 @@ public abstract class Optimizer
 	private int populationSize;
 	protected int currentIteration;
 	
-	
-	
-	
 	public Optimizer(int populationSize)
 	{
 		this.setAlgorithm(Algorithm);

@@ -48,7 +48,7 @@ public class Visual extends Application
 		Scene scene = new Scene(pane, 1280, 720);
 		
 		GridPane gridPane = new GridPane();
-		SolutionSpace sphere = new EggHolder();
+		SolutionSpace sphere = new Rastrigin(2);
 		
 		for(int i = 0; i < detail; i++)
 		{
@@ -64,12 +64,12 @@ public class Visual extends Application
 		
 		
 		
-		Optimizer pso = new PSO(100, 0.9, 2, 2);
+		Optimizer pso = new PSO(25, 0.9, 2, 2);
 		
 //		Optimizer ga = new GA(100, 0.01, new DeepTournament(), new BLX());
 //		((GA) ga).setElitismRate(0.2);
 		
-		Optimizer ga = new TandemHybrid(100, 0.9, 2, 2, 0.01, 0.4);
+		Optimizer ga = new TandemHybrid(25, 0.9, 2, 2, 0.01, 0.4);
 		
 		
 		int iteration = 20;
@@ -114,7 +114,6 @@ public class Visual extends Application
 				circles[i].setLayoutY(circles[i].getLayoutY() * (scene.getHeight()/25));
 			}
 			
-			System.out.println((scene.getWidth()*4/detail));
 
 			for(int i = 0; i < otherCircles.length; i++)
 			{

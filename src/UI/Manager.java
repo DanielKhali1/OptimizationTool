@@ -24,7 +24,7 @@ public class Manager
 {
 	public static void main(String[] args) 
 	{
-		SolutionSpace ackley = new Sphere(10);
+		SolutionSpace ackley = new EggHolder();
 		Optimizer pso = new PSO(50, 0.3, 2, 2);	
 		
 		System.out.println(ackley.Function(ackley.getGlobalMinimum()));
