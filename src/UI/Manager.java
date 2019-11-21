@@ -14,7 +14,6 @@ import SolutionSpace.Benchmarks.Ackley;
 import SolutionSpace.Benchmarks.DropWave;
 import SolutionSpace.Benchmarks.Easom;
 import SolutionSpace.Benchmarks.EggHolder;
-import SolutionSpace.Benchmarks.HolderTable;
 import SolutionSpace.Benchmarks.Levy;
 import SolutionSpace.Benchmarks.Rastrigin;
 import SolutionSpace.Benchmarks.Sphere;
