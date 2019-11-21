@@ -6,7 +6,7 @@ package Util;
  * @author Danny
  *
  */
-public class Vector 
+public class Vector
 {
 	private double[] components;
 	
@@ -29,6 +29,19 @@ public class Vector
 		for(int i = 0; i < vector.getComponents().length; i++)
 		{
 			this.getComponents()[i] += vector.getComponents()[i];
+		}
+	}
+	
+	/**
+	 * <p> input a vector, method will subtract each individual component to the vectors respected component </p>
+	 * 
+	 * @param vector
+	 */
+	public void sub ( Vector vector )
+	{
+		for(int i = 0; i < vector.getComponents().length; i++)
+		{
+			this.getComponents()[i] -= vector.getComponents()[i];
 		}
 	}
 	

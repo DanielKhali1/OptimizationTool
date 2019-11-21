@@ -3,12 +3,16 @@ package UI;
 import Experiment.TestCase;
 import Optimization.Optimizer;
 import Optimization.GA.GA;
+import Optimization.GA.CrossoverMethod.Average;
 import Optimization.GA.CrossoverMethod.BLX;
 import Optimization.GA.SelectionMethod.DeepTournament;
 import Optimization.GA.SelectionMethod.Tournament;
+import Optimization.Hybrid.TandemHybrid;
+import Optimization.PSO.PSO;
 import SolutionSpace.SolutionSpace;
 import SolutionSpace.Benchmarks.Ackley;
 import SolutionSpace.Benchmarks.DropWave;
+import SolutionSpace.Benchmarks.Easom;
 import SolutionSpace.Benchmarks.EggHolder;
 import SolutionSpace.Benchmarks.Levy;
 import SolutionSpace.Benchmarks.Rastrigin;
@@ -19,13 +23,20 @@ public class Manager
 {
 	public static void main(String[] args) 
 	{
-		SolutionSpace dropwave = new DropWave();
-		Optimizer ga = new GA(200, 0.01, new DeepTournament(), new BLX());
-		int iteration = 200;
+		SolutionSpace ackley = new EggHolder();
+		Optimizer pso = new PSO(50, 0.3, 2, 2);	
 		
-		TestCase test = new TestCase(iteration, dropwave, ga);
-		test.run(false, true, false);
+		System.out.println(ackley.Function(ackley.getGlobalMinimum()));
 		
+		Optimizer ga = new GA(50, 0.01, new DeepTournament(), new BLX());
+		
+		Optimizer tandem = new TandemHybrid(50, 0.9, 2, 2, 0.01, 0.2);
+
+		
+		int iteration = 20;
+		
+		TestCase test = new TestCase(iteration, ackley, ga, pso, tandem);
+		test.run(false, true, 100);
 		
 	}
 
