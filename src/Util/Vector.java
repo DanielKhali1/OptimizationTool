@@ -19,6 +19,15 @@ public class Vector
 		this.setComponents(components);
 	}
 	
+	/** <p> constructor initializes the vector's "component" array with elements of magnitude 0 </p>
+	 * 
+	 * @param components
+	 */
+	public Vector( int dimensions)
+	{
+		this.components = new double[dimensions];
+	}
+	
 	/**
 	 * <p> input a vector, method will add each individual component to the vectors respected component </p>
 	 * 

@@ -13,7 +13,7 @@ public abstract class SolutionSpace
 	private double lowerBound;
 	private double higherBound;
 	private Vector globalMinimum;
-	private double dimensions;
+	private int dimensions;
 	
 	
 	/**
@@ -35,7 +35,7 @@ public abstract class SolutionSpace
 	public void setHigherBound(double higherBound) { this.higherBound = higherBound; }
 	public void setLowerBound(double lowerBound) { this.lowerBound = lowerBound; }
 	public void setName(String name) {this.name = name; }
-	public void setDimensions(double dimensions) {this.dimensions = dimensions;}
+	public void setDimensions(int dimensions) {this.dimensions = dimensions;}
 
 
 
