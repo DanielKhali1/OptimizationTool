@@ -15,6 +15,7 @@ import SolutionSpace.Benchmarks.Ackley;
 import SolutionSpace.Benchmarks.DropWave;
 import SolutionSpace.Benchmarks.Easom;
 import SolutionSpace.Benchmarks.EggHolder;
+import SolutionSpace.Benchmarks.HolderTable;
 import SolutionSpace.Benchmarks.Levy;
 import SolutionSpace.Benchmarks.Rastrigin;
 import SolutionSpace.Benchmarks.Sphere;
@@ -25,7 +26,7 @@ public class Manager
 	public static void main(String[] args) 
 	{
 		SolutionSpace ss = new Rastrigin(3);
-		Optimizer pso = new PSO(50, 0.3, 2, 2);
+		SolutionSpace ackley = new HolderTable();
 		
 		System.out.println("GLOBAL MINIMUM " + ss.Function(ss.getGlobalMinimum()));
 		
@@ -36,10 +37,12 @@ public class Manager
 		GA oldfashionedGA = new GA(50, 0.01, new DeepTournament(), new RandomPoint());
 
 		
-		int iteration = 20;
+		int iteration = 100;
 		
 		TestCase test = new TestCase(iteration, ss, oldfashionedGA);
 		test.run(true, false, 100);
+		TestCase test = new TestCase(iteration, ackley, ga, pso, tandem);
+		test.run(false, true, 50);
 		
 	}
 

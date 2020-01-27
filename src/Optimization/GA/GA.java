@@ -150,7 +150,7 @@ public class GA extends Optimizer
 		{
 			if(mutationRate > Math.random())
 			{
-				child.getComponents()[i] *= (Math.random() * 2);
+				child.getComponents()[i] *= (Math.random() * 4)-2;
 			}
 		}
 	}
