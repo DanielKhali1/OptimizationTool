@@ -36,6 +36,8 @@ public class Visual extends Application
 	// hey leo do you know how you would be able to create like a random 3d solution space?
 	Circle[] circles;
 	Circle[] otherCircles;
+	Circle minimum = new Circle(20);
+	
 	
 	int detail = 100;
 	
@@ -50,17 +52,19 @@ public class Visual extends Application
 		GridPane gridPane = new GridPane();
 		SolutionSpace sphere = new Rastrigin(2);
 		
-		for(int i = 0; i < detail; i++)
-		{
-			for(int j = 0; j < detail; j++)
-			{
-				Rectangle rect = new Rectangle(scene.getWidth()/detail, scene.getHeight()/detail);
-				rect.setFill(new Color((double)j/(double)detail, (double)i/(double)detail, (double)j/(double)detail, (double)j/(double)detail));
-				gridPane.add(rect, j, i);
-			}
-		}
-		
-		pane.getChildren().add(gridPane);
+//		for(int i = 0; i < detail; i++)
+//		{
+//			for(int j = 0; j < detail; j++)
+//			{
+//				Rectangle rect = new Rectangle(scene.getWidth()/detail, scene.getHeight()/detail);
+//				rect.setFill(new Color((double)j/(double)detail, (double)i/(double)detail, (double)j/(double)detail, (double)j/(double)detail));
+//				gridPane.add(rect, j, i);
+//			}
+//		}
+//		
+//
+//		
+//		pane.getChildren().add(gridPane);
 		
 		
 		
@@ -75,6 +79,11 @@ public class Visual extends Application
 		int iteration = 20;
 
 		TestCase test = new TestCase(iteration, sphere, pso, ga);
+		minimum.setFill(Color.LIMEGREEN);
+		minimum.relocate(sphere.getHigherBound(), sphere.getHigherBound());
+		minimum.setLayoutX(minimum.getLayoutX() * (scene.getWidth()/detail));
+		minimum.setLayoutY(minimum.getLayoutY() * (scene.getHeight()/detail));
+		pane.getChildren().add(minimum);
 		
 		circles = new Circle[pso.getPopulation().length];
 		for(int i = 0; i < circles.length; i++)
@@ -83,7 +92,6 @@ public class Visual extends Application
 			circles[i].setFill(Color.RED);
 			circles[i].setStroke(Color.BLACK);
 			circles[i].relocate(pso.getPopulation()[i].getComponents()[0]+ sphere.getHigherBound(), pso.getPopulation()[i].getComponents()[1]+ sphere.getHigherBound());
-			
 			circles[i].setLayoutX(circles[i].getLayoutX() * (scene.getWidth()/detail));
 			circles[i].setLayoutY(circles[i].getLayoutY() * (scene.getHeight()/detail));
 			
