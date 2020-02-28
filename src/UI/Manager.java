@@ -25,24 +25,20 @@ public class Manager
 {
 	public static void main(String[] args) 
 	{
-		SolutionSpace ss = new Rastrigin(3);
-		SolutionSpace ackley = new HolderTable();
+		SolutionSpace ss = new Rastrigin(2);
 		
 		System.out.println("GLOBAL MINIMUM " + ss.Function(ss.getGlobalMinimum()));
 		
 		Optimizer ga = new GA(50, 0.01, new DeepTournament(), new BLX());
-		
 		Optimizer tandem = new TandemHybrid(50, 0.9, 2, 2, 0.01, 0.2);
 		
-		GA oldfashionedGA = new GA(50, 0.01, new DeepTournament(), new RandomPoint());
+		Optimizer pso = new PSO(50, 0.9, 2, 2);
 
 		
 		int iteration = 100;
 		
-		TestCase test = new TestCase(iteration, ss, oldfashionedGA);
-		test.run(true, false, 100);
-		TestCase test = new TestCase(iteration, ackley, ga, pso, tandem);
-		test.run(false, true, 50);
+		TestCase test = new TestCase(iteration, ss, ga, pso, tandem );
+		test.run(true, true, 100);
 		
 	}
 
