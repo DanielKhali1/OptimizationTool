@@ -1,6 +1,8 @@
 package Optimization.GA.SelectionMethod;
 
 
+import java.util.Arrays;
+
 import SolutionSpace.SolutionSpace;
 import Util.Vector;
 
@@ -18,7 +20,7 @@ public class DeepTournament implements Selection
 		Vector fighter4 = population[(int)(Math.random() * population.length)];
 		
 		Vector champion2 = (ss.Function(fighter3) < ss.Function(fighter4) ) ? fighter3 : fighter4;
-
+		
 		return (ss.Function(champion1) < ss.Function(champion2) ) ? champion1 : champion2;
 
 	}

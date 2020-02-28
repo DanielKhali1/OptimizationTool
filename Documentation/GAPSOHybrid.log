@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.2.1)  10 FEB 2020 14:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.2.1)  24 FEB 2020 15:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1045,7 +1045,7 @@ sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/s
 hare/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/typ
 e1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
 ftt1200.pfb>
-Output written on GAPSOHybrid.pdf (7 pages, 813690 bytes).
+Output written on GAPSOHybrid.pdf (7 pages, 813711 bytes).
 PDF statistics:
  238 PDF objects out of 1000 (max. 8388607)
  190 compressed objects within 2 object streams

@@ -68,8 +68,6 @@ public class TestCase
 				data[i][j] /= avg;
 			}
 		}
-		
-		
 
 		for(int i = 0; i < data.length; i++)
 		{

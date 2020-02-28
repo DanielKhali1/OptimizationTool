@@ -12,18 +12,17 @@ public class RandomPoint implements Crossover
 		// RandomPoint crosssover
 		int crossoverPoint = (int)(Math.random() * 64);
 		
-		Vector child = new Vector(s.getDimensions());
-		//convert to binary strings
+		Vector child = new Vector(parent1.getComponents().length);
 		String[] parent1B =  new String[(int) s.getDimensions()];
 		String[] parent2B =  new String[(int) s.getDimensions()];
 		
+			
 		for(int i = 0; i < s.getDimensions(); i++)
 		{
 			parent1B[i] = binarize(parent1.getComponents()[i]);
 			parent2B[i] = binarize(parent2.getComponents()[i]);
 		}
 		
-		// crossover
 		
 		for(int i = 0; i < child.getComponents().length; i++)
 		{
@@ -61,6 +60,13 @@ public class RandomPoint implements Crossover
 		}
 		
 		return binaryString;
+	}
+	
+	public static void main(String[] args) {
+		RandomPoint r = new RandomPoint();
+		System.out.println(	r.binarize(-30.43453424));
+		System.out.println(	r.debinarize(r.binarize(-30.43453424)));
+
 	}
 	
 	private double debinarize(String binaryString) 

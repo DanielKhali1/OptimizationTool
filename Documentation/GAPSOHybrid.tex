@@ -107,7 +107,7 @@ Selection is run twice to return two viable parents for crossover.
 \item \textbf{Crossover}
 Crossover includes breeding two parent solutions together to create a child of those two solutions. The purpose of crossover or blending solutions together, is to allow convergence to a point within a solution space. In this research a real number variation of the crossover algorithm was chosen to be BLX (blended crossover).\\
 
-BLX is a method of crossover that blends real number solutions together[10]. with parents $x_i$ and $y_i$ for each offspring generated $d_i = $ | $x_i - y_i $ |\\
+BLX is a method of crossover that blends real number solutions[10]. with parents $x_i$ and $y_i$ for each offspring generated $d_i = $ | $x_i - y_i $ |\\
 
 generate $u$, a random number within the range: \\
 $$ [ min (x_i, y_i) - a * d_i, max(x_i, y_i) + a * d_i ] $$
@@ -347,11 +347,11 @@ The Easom function’s hybrid algorithm execution had a slightly quicker converg
 
 \section{Conclusion}
 
-	    The proposed GAPSO hybridization outperformed GA and PSO on three different benchmark functions: the Rastrigin, Easom, and Levy function. In 4 other tests: the Egg Holder, Holder Table, Ackley, and Sphere function, the difference in convergence speed was either less efficient within a maximum of 3 iterations or negligible with approximately the same convergence.  Although GA or PSO never significantly outperformed the hybrid, the accuracy and speed compared to the standard seemed unimpressive in all cases but Rastrigin. The hybrid optimizing the Rastrigin function was faster and more accurate in every test for every dimension.
+	    The proposed GAPSO hybridization outperformed GA and PSO on three different benchmark functions: the Rastrigin, Easom, and Levy function. In 4 other tests: the Egg Holder, Holder Table, Ackley, and Sphere function, the difference in convergence speed was approximately the same convergence. With the exception of the rastrigin benchmark, GAPSO did not significantly outperform GA or PSO. Although GA or PSO never significantly outperformed the hybrid, the accuracy and speed compared to the standard seemed unimpressive in all cases but Rastrigin. The hybrid optimizing the Rastrigin function was faster and more accurate in every test for every dimension.
 
 Utilizing the given parameters for PSO and GA, 71.4\% of the tests favored PSO over GA. PSO outperformed GA in 5 out of the 7 in the given benchmark functions. The other 29.6\% favored GA over PSO on the Levy and Rastrigin function.
 
-The intention behind the implementation of the hybrid algorithm was to blend both of the exploration features of GA and PSO into one hybrid meta-heuristic algorithm. The expectation was that combining both exploration features would expidite the convergence speed of the algorithm on more deceptive or noise filled benchmark functions. The results of testing this algorithm on a variety of benchmark functions and comparing it to GA and PSO's results. Under a specific set of functions, combining these algorithms is favorable although implementation in a broader collection of solution spaces would warrant the use of PSO.
+The intention behind the the hybrid algorithm was to blend both of the exploration features of GA and PSO into one hybrid meta-heuristic algorithm. The expectation was that combining both exploration features would expidite the convergence speed of the algorithm on more deceptive or noise filled benchmark functions. The results of testing this algorithm on a variety of benchmark functions and comparing it to GA and PSO's results. Under a specific set of functions, combining these algorithms is favorable although implementation in a broader collection of solution spaces would warrant the use of PSO.
 
 Other research has implemented the hybridization of GA and PSO several times[2][3][4], the goal of this paper to open up another perspective on how this hybridization could be accomplished.
 

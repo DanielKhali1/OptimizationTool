@@ -1,5 +1,7 @@
 package Optimization.GA;
 
+import java.util.Arrays;
+
 import Optimization.Optimizer;
 import Optimization.GA.CrossoverMethod.Average;
 import Optimization.GA.CrossoverMethod.BLX;
