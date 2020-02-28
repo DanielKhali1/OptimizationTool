@@ -1,13 +1,12 @@
 package Optimization.GA;
 
-import java.util.Arrays;
 
 import Optimization.Optimizer;
-import Optimization.GA.CrossoverMethod.Average;
 import Optimization.GA.CrossoverMethod.BLX;
 import Optimization.GA.CrossoverMethod.Crossover;
 import Optimization.GA.SelectionMethod.DeepTournament;
 import Optimization.GA.SelectionMethod.Selection;
+import Util.BinaryOperations;
 import Util.Vector;
 
 /**<p> Pure Genetic Algorithm Class </p>
@@ -148,12 +147,26 @@ public class GA extends Optimizer
 	 */
 	private void mutate(Vector child)
 	{
+		String[] childStringAr =  new String[(int)child.getComponents().length];
+		
 		for(int i = 0; i < child.getComponents().length; i++)
 		{
-			if(mutationRate > Math.random())
+			childStringAr[i] = BinaryOperations.binarize(child.getComponents()[i]);
+		}
+		
+		
+		for(int i = 0; i < child.getComponents().length; i++)
+		{
+			for(int j = 0; j < childStringAr[i].length(); j++)
 			{
-				child.getComponents()[i] *= (Math.random() * 4)-2;
+				if(mutationRate > Math.random())
+				{
+					childStringAr[i] = childStringAr[i].substring(0, j) + ((int)Math.random()) + childStringAr[i].substring(j+1);
+//					child.getComponents()[i] *= (Math.random() * 4)-2;
+				}
 			}
+			
+			child.getComponents()[i] = BinaryOperations.debinarize(childStringAr[i]);
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package Optimization.GA.CrossoverMethod;
 
 import SolutionSpace.SolutionSpace;
+import Util.BinaryOperations;
 import Util.Vector;
 
 public class RandomPoint implements Crossover
@@ -19,8 +20,8 @@ public class RandomPoint implements Crossover
 			
 		for(int i = 0; i < s.getDimensions(); i++)
 		{
-			parent1B[i] = binarize(parent1.getComponents()[i]);
-			parent2B[i] = binarize(parent2.getComponents()[i]);
+			parent1B[i] = BinaryOperations.binarize(parent1.getComponents()[i]);
+			parent2B[i] = BinaryOperations.binarize(parent2.getComponents()[i]);
 		}
 		
 		
@@ -29,64 +30,20 @@ public class RandomPoint implements Crossover
 			String firstPart = parent1B[i].substring(0, crossoverPoint);
 			String secondPart = parent2B[i].substring(crossoverPoint);
 			
-			child.getComponents()[i] = debinarize(firstPart + secondPart);
+			child.getComponents()[i] = BinaryOperations.debinarize(firstPart + secondPart);
 		}
 		
 		return child;
 	}
 
-	private String binarize(double d) 
-	{
-		double decimal = d;
-		String binaryString = "";
-		if(decimal < 0)
-		{
-			binaryString += "1";
-			decimal = Math.abs(decimal);
-		}
-		else
-			binaryString += "0";
-		for(int i = 11; i >= -51; i--)
-		{
-			if(decimal - Math.pow(2, i) >= 0)
-			{
-				decimal -= Math.pow(2, i);
-				binaryString += "1";
-			}
-			else
-			{
-				binaryString += "0";
-			}
-		}
-		
-		return binaryString;
-	}
+	
 	
 	public static void main(String[] args) {
-		RandomPoint r = new RandomPoint();
-		System.out.println(	r.binarize(-30.43453424));
-		System.out.println(	r.debinarize(r.binarize(-30.43453424)));
+		System.out.println(	BinaryOperations.binarize(-30.43453424));
+		System.out.println(	BinaryOperations.debinarize(BinaryOperations.binarize(-30.43453424)));
 
 	}
 	
-	private double debinarize(String binaryString) 
-	{
-		double decimal = 0;
-		
-		for(int i = 1; i < binaryString.length(); i++)
-		{
-			if(binaryString.charAt(i) == '1')
-			{
-				decimal += Math.pow(2, -(i-1) + 11);
-			}
-		}
-		
-		if(binaryString.charAt(0) == '1')
-		{
-			decimal *= -1;
-		}
-		
-		return decimal;
-	}
+
 
 }

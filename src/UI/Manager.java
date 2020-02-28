@@ -29,15 +29,16 @@ public class Manager
 		
 		System.out.println("GLOBAL MINIMUM " + ss.Function(ss.getGlobalMinimum()));
 		
-		Optimizer ga = new GA(50, 0.01, new DeepTournament(), new BLX());
-		Optimizer tandem = new TandemHybrid(50, 0.9, 2, 2, 0.01, 0.2);
-		
-		Optimizer pso = new PSO(50, 0.9, 2, 2);
+		Optimizer ga = new GA(50, 0.01, new DeepTournament(), new RandomPoint());
+		Optimizer ga1 = new GA(50, 0.01, new DeepTournament(), new BLX());
+		Optimizer ga2 = new GA(50, 0.01, new DeepTournament(), new Average());
+//		Optimizer tandem = new TandemHybrid(50, 0.9, 2, 2, 0.01, 0.2);
+//		Optimizer pso = new PSO(50, 0.9, 2, 2);
 
 		
 		int iteration = 100;
 		
-		TestCase test = new TestCase(iteration, ss, ga, pso, tandem );
+		TestCase test = new TestCase(iteration, ss, ga, ga1, ga2 );
 		test.run(true, true, 100);
 		
 	}
